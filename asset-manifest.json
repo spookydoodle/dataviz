@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/dataviz/static/css/main.523f09c5.chunk.css",
-    "main.js": "/dataviz/static/js/main.a2c9252b.chunk.js",
-    "main.js.map": "/dataviz/static/js/main.a2c9252b.chunk.js.map",
+    "main.js": "/dataviz/static/js/main.75db1748.chunk.js",
+    "main.js.map": "/dataviz/static/js/main.75db1748.chunk.js.map",
     "runtime-main.js": "/dataviz/static/js/runtime-main.cec0987b.js",
     "runtime-main.js.map": "/dataviz/static/js/runtime-main.cec0987b.js.map",
-    "static/js/2.c42199b3.chunk.js": "/dataviz/static/js/2.c42199b3.chunk.js",
-    "static/js/2.c42199b3.chunk.js.map": "/dataviz/static/js/2.c42199b3.chunk.js.map",
+    "static/js/2.e015c76d.chunk.js": "/dataviz/static/js/2.e015c76d.chunk.js",
+    "static/js/2.e015c76d.chunk.js.map": "/dataviz/static/js/2.e015c76d.chunk.js.map",
     "index.html": "/dataviz/index.html",
-    "precache-manifest.2eb515ad37cca9aec94b71f8b018a603.js": "/dataviz/precache-manifest.2eb515ad37cca9aec94b71f8b018a603.js",
+    "precache-manifest.32b5ba09df1e25049e77453da78fbe40.js": "/dataviz/precache-manifest.32b5ba09df1e25049e77453da78fbe40.js",
     "service-worker.js": "/dataviz/service-worker.js",
     "static/css/main.523f09c5.chunk.css.map": "/dataviz/static/css/main.523f09c5.chunk.css.map",
-    "static/js/2.c42199b3.chunk.js.LICENSE.txt": "/dataviz/static/js/2.c42199b3.chunk.js.LICENSE.txt"
+    "static/js/2.e015c76d.chunk.js.LICENSE.txt": "/dataviz/static/js/2.e015c76d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.cec0987b.js",
-    "static/js/2.c42199b3.chunk.js",
+    "static/js/2.e015c76d.chunk.js",
     "static/css/main.523f09c5.chunk.css",
-    "static/js/main.a2c9252b.chunk.js"
+    "static/js/main.75db1748.chunk.js"
   ]
 }
