@@ -6,6 +6,7 @@ const PALETTES = {
     GREEN_BROWN: {"Metallic Seaweed":"#177e89","Midnight Green Eagle Green":"#084c61","CG Red":"#db3a34","Maximum Yellow Red":"#ffc857","Jet":"#323031"},
     YELLOW_BLUE: {"Maximum Yellow Red":"#ffbc42","Ruby":"#d81159","Quinacridone Magenta":"#8f2d56","Celadon Green":"#218380","Sky Blue Crayola":"#73d2de"},
     BLACK_RED: {"Rich Black FOGRA 29":"#001427","Xanadu":"#708d81","Jasmine":"#f4d58d","International Orange Engineering":"#bf0603","Dark Red":"#8d0801"},
+    ORANGE_ONYX: {"Orange Soda":"#f06543","Platinum":"#e8e9eb","Alabaster":"#e0dfd5","Onyx":"#313638","Sandy Brown":"#f09d51"},
 }
 
 export default PALETTES;

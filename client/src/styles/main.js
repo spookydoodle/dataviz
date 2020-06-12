@@ -57,7 +57,16 @@ export const useStyles = makeStyles(theme => ({
         width: '100px',
     },
     spacingRight: {
-        marginRight: theme.spacing(2),
+        paddingRight: theme.spacing(1),
+    },
+    spacingLeft: {
+        paddingLeft: theme.spacing(1),
+    },
+    spacingTop: {
+        paddingTop: theme.spacing(1),
+    },
+    spacingBottom: {
+        paddingBottom: theme.spacing(1),
     },
     height200: {
         height: '200px',
@@ -69,23 +78,6 @@ export const useStyles = makeStyles(theme => ({
     },
     bottom20: {
         marginBottom: '20px',
-    },
-    padding2: {
-        padding: theme.spacing(2),
-    },
-    padding4: {
-        padding: theme.spacing(4),
-    },
-    padding5: {
-        padding: theme.spacing(5),
-    },
-    margin2: {
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2),
-    },
-    margin4: {
-        marginTop: theme.spacing(4),
-        marginBottop: theme.spacing(4),
     },
 
     // Containers

@@ -11,7 +11,7 @@ import { easeLinear } from 'd3-ease';
 import { transition } from 'd3-transition';
 import PALETTES from '../../constants/colors';
 
-class RaceBarChart extends Component {
+class BarChartRace extends Component {
     constructor(props) {
         super(props)
         this.createBarChart = this.createBarChart.bind(this)
@@ -232,4 +232,4 @@ class RaceBarChart extends Component {
     }
 }
 
-export default RaceBarChart;
+export default BarChartRace;
