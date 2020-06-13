@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStyles } from '../styles/main';
-import { Loading } from '../components/Loading';
+import { LinearBuffer, Empty } from '../components/Loading';
 import { Container, Grid, Typography, } from '@material-ui/core';
 import HorizontalBarChart from '../components/charts/HorizontalBarChart'
 import VerticalBarChart from '../components/charts/VerticalBarChart'
@@ -15,10 +15,10 @@ const Dashboard = ({ data }) => {
     const classes = useStyles();
     const colPal = Object.values(PALETTES.GREEN_ORANGE);
     return (
-        <div style={{ backgroundColor: colPal[0] }}>
+        <div style={{ backgroundColor: colPal[0], minHeight: '100vh'}}>
             <Container maxWidth="lg">
-                {!data || data.length === 0 ?
-                    <Loading /> : (
+                {!data || data.length === 0 ? 
+                    <LinearBuffer /> : (
                         <Grid
                             container
                             spacing={2}
@@ -26,6 +26,7 @@ const Dashboard = ({ data }) => {
                         // justify="space-evenly"
                         // alignItems="stretch"
                         >
+                            
                             <Grid item xs={12}>
                                 <Typography variant="h5" style={{ color: "#FFF" }}>
                                     Ultracool dashboard with some data
@@ -34,7 +35,7 @@ const Dashboard = ({ data }) => {
                                     ...well, at least the beginning of an ultracool dashboard :3
                             </Typography>
                             </Grid>
-
+                            
                             <Grid container item xs={12} md={6}>
                                 <Grid item xs={12} className={classes.spacingBottom}>
                                     <ChartCard
@@ -90,7 +91,10 @@ const Dashboard = ({ data }) => {
                                 <ChartCard
                                     title="Ordered quantity by country-division-month"
                                     subtitle="Values are in pieces"
-                                    description="This one adjusts bar width responsively to container width"
+                                    description={<span>
+                                        This one adjusts bar width responsively to container width. Stolen from the Stack Overflow survey result webpage. 
+                                        <i className="user secret icon" href="/" />
+                                        </span>}
                                     color={colPal[0]}
                                     content={<HorizontalBarChartRespWidth
                                         data={data.map(row => ({ category: `${row.country.text} - ${row.division.text} - ${row.month.text}`, value: row.qty.value }))}

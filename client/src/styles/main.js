@@ -164,6 +164,7 @@ export const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        justifyContent: 'center',
         padding: '5%',
         fontSize: '10em',
         color: color1,

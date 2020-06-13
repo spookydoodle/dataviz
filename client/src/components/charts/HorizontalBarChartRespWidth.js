@@ -11,6 +11,9 @@ const useStyles = makeStyles(theme => ({
         boxSizing: 'border-box',
         display: 'inline-block',
         lineHeight: '10pt',
+        [theme.breakpoints.down('sm')]: {
+            maxWidth: theme.breakpoints.width('sm'),
+        },
     },
     barRow: {
         boxSizing: 'border-box',
@@ -28,13 +31,28 @@ const useStyles = makeStyles(theme => ({
         float: 'left',
         textAlign: 'right',
         verticalAlign: 'center',
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'left',
+            marginBottom: '2px',
+            display: 'block',
+            float: 'none',
+            width: 'auto',
+        },
     },
+
     barLabel2: {
         fontWeight: 'bolder',
         width: '6%',
         minWidth: '45px',
         paddingRight: '10px',
         textAlign: 'center',
+        [theme.breakpoints.down('sm')]: {
+            textAlign: 'left',
+            marginBottom: '2px',
+            display: 'block',
+            float: 'none',
+            width: 'auto',
+        },
     },
     list: {
         listStyle: 'none',
@@ -43,8 +61,11 @@ const useStyles = makeStyles(theme => ({
         display: 'inline-block',
         position: 'relative',
         boxSizing: 'border-box',
-        paddingInlineStart: '10px',
+        // paddingInlineStart: '10px',
         width: '40%',
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+        },
     },
     bar: {
         border: '2px solid #000',
