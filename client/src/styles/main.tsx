@@ -1,7 +1,7 @@
 /* 
     The purpose of this file is to integrate all styles in one place and reuse classes in various components
 */
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 
 // Below components need to be imported to correctly overwrite styles with classes in useStyle
 import AppBar from '@material-ui/core/AppBar';
@@ -108,23 +108,26 @@ const useStyles = makeStyles((theme: Theme) =>
             borderRadius: '3px',
             margin: '0 auto',
         },
+        root: {
+            display: 'flex',
+        },
         appBar: {
-            transition: theme.transitions.create(['margin', 'width'], {
+            zIndex: theme.zIndex.drawer + 1,
+            transition: theme.transitions.create(['width', 'margin'], {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.leavingScreen,
             }),
         },
         appBarShift: {
-            width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
-            transition: theme.transitions.create(['margin', 'width'], {
-                easing: theme.transitions.easing.easeOut,
+            width: `calc(100% - ${drawerWidth}px)`,
+            transition: theme.transitions.create(['width', 'margin'], {
+                easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.enteringScreen,
             }),
         },
-        toolbar: theme.mixins.toolbar,
         menuButton: {
-            marginRight: theme.spacing(2),
+            marginRight: 36,
         },
         hide: {
             display: 'none',
@@ -132,45 +135,37 @@ const useStyles = makeStyles((theme: Theme) =>
         drawer: {
             width: drawerWidth,
             flexShrink: 0,
+            whiteSpace: 'nowrap',
         },
-        drawerPaper: {
-            width: `${drawerWidth}px`,
+        drawerOpen: {
+            width: drawerWidth,
+            transition: theme.transitions.create('width', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
         },
-        formPaper: {
-            padding: theme.spacing(2),
-            color: theme.palette.primary.main,
-            width: '33%',
-            minWidth: '400px',
-            marginTop: '3%',
+        drawerClose: {
+            transition: theme.transitions.create('width', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.leavingScreen,
+            }),
+            overflowX: 'hidden',
+            width: theme.spacing(7) + 1,
+            [theme.breakpoints.up('sm')]: {
+                width: theme.spacing(9) + 1,
+            },
         },
-        drawerHeader: {
+        toolbar: {
             display: 'flex',
             alignItems: 'center',
-            padding: theme.spacing(0, 1),
-            // // necessary for content to be below app bar
-            // ...theme.mixins.toolbar,
-            minHeight: `${toolbarHeight}px !important`,
             justifyContent: 'flex-end',
-        },
-        contentPadding: {
-            flexGrow: 1,
-            padding: theme.spacing(3),
+            padding: theme.spacing(0, 1),
+            // necessary for content to be below app bar
+            ...theme.mixins.toolbar,
         },
         content: {
             flexGrow: 1,
             padding: theme.spacing(3),
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
-            }),
-            marginLeft: -drawerWidth,
-        },
-        contentShift: {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
         },
         vertMargin: {
             marginBottom: '10px',

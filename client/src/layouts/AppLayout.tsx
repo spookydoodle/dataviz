@@ -40,8 +40,8 @@ const AppLayout = ({
 }: Props) => {
     const classes = useStyles();
 
-    // Drawer functions
-    const [open, setOpen] = useState(false);
+
+    const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -49,17 +49,6 @@ const AppLayout = ({
 
     const handleDrawerClose = () => {
         setOpen(false);
-    };
-
-    const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-        if (
-            event.type === 'keydown' &&
-            ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')
-        ) {
-            return;
-        }
-
-        setOpen(open);
     };
 
     return (
@@ -77,25 +66,24 @@ const AppLayout = ({
                 />
             )}
 
-            <MenuDrawer user={user} {...drawer} mode={mode} setMode={setMode} open={open} toggleDrawer={toggleDrawer} />
+            <MenuDrawer
+                user={user}
+                {...drawer}
+                mode={mode}
+                setMode={setMode}
+                open={open}
+                handleDrawerOpen={handleDrawerOpen}
+                handleDrawerClose={handleDrawerClose}
+            />
 
-            {jumbotron && <Jumbotron {...jumbotron} />}
+            {/* {jumbotron && <Jumbotron {...jumbotron} />} */}
 
-            <main
-                className={
-                    drawer && drawer.variant === 'persistent'
-                        ? clsx(classes.content, {
-                              [classes.contentShift]: open,
-                          })
-                        : classes.contentPadding
-                }
-            >
-                <div className={jumbotron ? classes.jumbotron : classes.drawerHeader} />
-
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
                 {children}
             </main>
-            {/* <NotificationsRenderer notifications={notifications} onShown={onNotificationShown} /> */}
-        </ThemeWrapper>
+            {/* <NotificationsRenderer notifications={notifications} onShown={onNotificationShown} />  */}
+        </ThemeWrapper >
     );
 };
 

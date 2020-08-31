@@ -21,9 +21,11 @@ const ThemeWrapper = ({ mode, children }: Props) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline />
+            <div className={classes.root}>
+                <CssBaseline />
 
-            {children}
+                {children}
+            </div>
         </ThemeProvider>
     );
 };

@@ -39,14 +39,13 @@ class App extends Component<{}, State> {
       <Router>
         <ScrollToTop>
           <div className="App">
-
             <Switch>
               {/*
-                            A Switch will iterate through all routes and return
-                            on the first match.
-                            The order matters - the most generic paths should
-                            be at the very end.
-                        */}
+                A Switch will iterate through all routes and return
+                on the first match.
+                The order matters - the most generic paths should
+                be at the very end.
+              */}
 
               <Route exact path={root}>
                 <Redirect to={home} />
