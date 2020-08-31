@@ -23,8 +23,8 @@ interface Props {
     appBar?: boolean;
     mode: Mode;
     setMode: any;
-    notifications: any;
-    onNotificationShown: any;
+    // notifications: any;
+    // onNotificationShown: any;
 }
 
 const AppLayout = ({
@@ -35,8 +35,8 @@ const AppLayout = ({
     appBar,
     mode,
     setMode,
-    notifications,
-    onNotificationShown,
+    // notifications,
+    // onNotificationShown,
 }: Props) => {
     const classes = useStyles();
 
@@ -94,7 +94,7 @@ const AppLayout = ({
 
                 {children}
             </main>
-            <NotificationsRenderer notifications={notifications} onShown={onNotificationShown} />
+            {/* <NotificationsRenderer notifications={notifications} onShown={onNotificationShown} /> */}
         </ThemeWrapper>
     );
 };

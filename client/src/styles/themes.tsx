@@ -8,8 +8,8 @@ import { fade, makeStyles, useTheme, Theme, createStyles } from '@material-ui/co
 // Below components need to be imported to correctly overwrite styles with classes in useStyle
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
-const header = require('../img/landing/header-1.jpg');
-const header2 = require('../img/landing/header-2.jpg');
+// const header = require('../img/landing/header-1.jpg');
+// const header2 = require('../img/landing/header-2.jpg');
 
 // Wrapper for the function in order to pass type parameter.
 // Requires defining 'const theme' in components which make use of it. See Layout.tsx

@@ -2,6 +2,7 @@ import React from 'react';
 import { useStyles } from '../styles/main';
 import { LinearBuffer, Empty } from '../components/Loading';
 import { Container, Grid, Typography, } from '@material-ui/core';
+import AppLayout from '../layouts/AppLayout';
 import HorizontalBarChart from '../components/charts/HorizontalBarChart'
 import VerticalBarChart from '../components/charts/VerticalBarChart'
 import BarChartRace from '../components/charts/BarChartRace'
@@ -9,19 +10,32 @@ import HorizontalBarChartRespWidth from '../components/charts/HorizontalBarChart
 // import moment from 'moment';
 import PALETTES from '../constants/colors';
 import ChartCard from '../components/ChartCard';
-import { StateData } from '../logic/types';
+import { StateData, Mode, User, NotificationProps } from '../logic/types';
 
 interface Props {
+    user: User;
     data?: StateData;
+    mode: Mode;
+    setMode: any;
+    next?: any;
+    notificationsProps?: NotificationProps;
+    showError?: any;
 }
 
-const Dashboard = ({ data }: Props) => {
+const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => {
     const classes = useStyles();
     const colPal = Object.values(PALETTES.GREEN_ORANGE);
     return (
-        <div style={{ backgroundColor: colPal[0], minHeight: '100vh'}}>
+        <AppLayout 
+            user={user} 
+            mode={mode} 
+            setMode={setMode} 
+            drawer={{ variant: "persistent"}}
+            appBar={true}
+            // {...notificationsProps}
+        >
             <Container maxWidth="lg">
-                {!data || data.length === 0 ? 
+                {!data || data.length === 0 ?
                     <LinearBuffer /> : (
                         <Grid
                             container
@@ -30,7 +44,7 @@ const Dashboard = ({ data }: Props) => {
                         // justify="space-evenly"
                         // alignItems="stretch"
                         >
-                            
+
                             <Grid item xs={12}>
                                 <Typography variant="h5" style={{ color: "#FFF" }}>
                                     Ultracool dashboard with some data
@@ -39,7 +53,7 @@ const Dashboard = ({ data }: Props) => {
                                     ...well, at least the beginning of an ultracool dashboard :3
                             </Typography>
                             </Grid>
-                            
+
                             <Grid container item xs={12} md={6}>
                                 <Grid item xs={12} className={classes.spacingBottom}>
                                     <ChartCard
@@ -96,9 +110,9 @@ const Dashboard = ({ data }: Props) => {
                                     title="Ordered quantity by country-division-month"
                                     subtitle="Values are in pieces"
                                     description={<span>
-                                        This one adjusts bar width responsively to container width. Stolen from the Stack Overflow survey result webpage. 
+                                        This one adjusts bar width responsively to container width. Stolen from the Stack Overflow survey result webpage.
                                         <i className="user secret icon" />
-                                        </span>}
+                                    </span>}
                                     color={colPal[0]}
                                     content={<HorizontalBarChartRespWidth
                                         data={data.filter((row, i) => i < 15).map(row => ({ category: `${row.country.text} - ${row.division.text} - ${row.month.text}`, value: row.qty.value }))}
@@ -109,7 +123,7 @@ const Dashboard = ({ data }: Props) => {
                         </Grid>
                     )}
             </Container>
-        </div>
+        </AppLayout>
     )
 };
 

@@ -58,6 +58,7 @@ interface State {
     user: User | null;
     whoamiRequestDone: boolean;
     mode: Mode;
+    notifications?: Array<Notification>;
     data?: StateData;
 }
 
