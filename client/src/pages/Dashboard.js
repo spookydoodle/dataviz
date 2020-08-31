@@ -97,7 +97,7 @@ const Dashboard = ({ data }) => {
                                         </span>}
                                     color={colPal[0]}
                                     content={<HorizontalBarChartRespWidth
-                                        data={data.map(row => ({ category: `${row.country.text} - ${row.division.text} - ${row.month.text}`, value: row.qty.value }))}
+                                        data={data.filter((row, i) => i < 15).map(row => ({ category: `${row.country.text} - ${row.division.text} - ${row.month.text}`, value: row.qty.value }))}
                                         color={colPal[0]}
                                     />}
                                 />
