@@ -18,15 +18,15 @@ const createTheme = (type: Mode) => {
         palette: {
             type: type,
             primary: {
-                light: '#B75D69',
-                main: '#372549',
-                dark: '#1A1423',
+                light: '#705D56',
+                main: '#32292F',
+                dark: '#32292F',
                 // contrastText: "#EAE2B7",
             },
             secondary: {
-                light: '#FF9B54',
-                main: '#CE4257',
-                dark: '#720026',
+                light: '#99E1D9',
+                main: '#70ABAF',
+                dark: '#70ABAF',
                 // contrastText: color4,
             },
             common: {
@@ -34,8 +34,8 @@ const createTheme = (type: Mode) => {
                 white: '#fff',
             },
             background: {
-                paper: type === 'dark' ? '#372549' : '#fff',
-                default: type === 'dark' ? '#1A1423' : '#fafafa',
+                paper: type === 'dark' ? '#372549' : '#F0F7F4',
+                default: type === 'dark' ? '#1A1423' : '#C5ECE7',
             },
             error: {
                 light: '#e57373',
@@ -62,8 +62,8 @@ const createTheme = (type: Mode) => {
                 contrastText: '#rgba(0, 0, 0, 0.87',
             },
             text: {
-                primary: type === 'dark' ? '#fff' : '#540D6E',
-                secondary: type === 'dark' ? '#fff' : '#540D6E',
+                primary: type === 'dark' ? 'rgba(255, 255, 255, .87)' : '#32292F',
+                secondary: type === 'dark' ? 'rgba(255, 255, 255, .6)' : '#705D56',
                 disabled: 'rgba(133, 30, 30, 0.38)',
                 hint: 'rgba(0, 0, 0, 0.38)',
             },

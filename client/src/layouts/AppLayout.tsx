@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import clsx from 'clsx';
-import { useStyles } from '../styles/main';
+import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import ThemeWrapper from '../components/navigation/ThemeWrapper';
 import Jumbotron from '../components/navigation/Jumbotron';
 import MenuDrawer from '../components/navigation/MenuDrawer';
@@ -26,6 +25,25 @@ interface Props {
     // notifications: any;
     // onNotificationShown: any;
 }
+
+const drawerWidth = 300;
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    toolbar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+    },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(3),
+    },
+  }),
+);
 
 const AppLayout = ({
     user,

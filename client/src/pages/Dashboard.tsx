@@ -45,14 +45,14 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                         // alignItems="stretch"
                         >
 
-                            <Grid item xs={12}>
+                            {/* <Grid item xs={12}>
                                 <Typography variant="h5" style={{ color: "#FFF" }}>
                                     Ultracool dashboard with some data
                             </Typography>
                                 <Typography variant="subtitle2" style={{ color: "#FFF" }}>
                                     ...well, at least the beginning of an ultracool dashboard :3
                             </Typography>
-                            </Grid>
+                            </Grid> */}
 
                             <Grid container item xs={12} md={6}>
                                 <Grid item xs={12} className={classes.spacingBottom}>

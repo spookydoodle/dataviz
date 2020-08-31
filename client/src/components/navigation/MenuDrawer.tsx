@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { useStyles } from '../../styles/main';
+import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import { Link } from '../../utils/Link';
 import { Drawer, List, ListItem, ListItemText, ListItemIcon, Divider, IconButton, Hidden } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -22,6 +22,44 @@ interface Props {
     variant?: DrawerVariant;
 }
 
+const drawerWidth = 300;
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+      whiteSpace: 'nowrap',
+    },
+    drawerOpen: {
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    drawerClose: {
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      overflowX: 'hidden',
+      width: theme.spacing(7) + 1,
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9) + 1,
+      },
+    },
+    toolbar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+    },
+  }),
+);
+
 // This component can be either temporary or persistent. By default temporary. use prop 'variant' to change to "persistent"
 const MenuDrawer = ({ user, variant = 'temporary', mode, setMode, open, handleDrawerClose, handleDrawerOpen }: Props) => {
     const classes = useStyles();
@@ -34,7 +72,6 @@ const MenuDrawer = ({ user, variant = 'temporary', mode, setMode, open, handleDr
         },
     ];
 
-    const style = { marginLeft: 'auto' };
 
     return (
         // <Drawer
