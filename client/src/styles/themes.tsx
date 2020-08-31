@@ -69,7 +69,7 @@ const createTheme = (type: Mode) => {
             },
         },
         typography: {
-            fontFamily: 'Raleway, sans-serif',
+            fontFamily: 'Lato',
             fontSize: 14,
         },
     });
