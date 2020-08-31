@@ -6,12 +6,16 @@ import HorizontalBarChart from '../components/charts/HorizontalBarChart'
 import VerticalBarChart from '../components/charts/VerticalBarChart'
 import BarChartRace from '../components/charts/BarChartRace'
 import HorizontalBarChartRespWidth from '../components/charts/HorizontalBarChartRespWidth'
-import moment from 'moment';
+// import moment from 'moment';
 import PALETTES from '../constants/colors';
 import ChartCard from '../components/ChartCard';
+import { StateData } from '../logic/types';
 
-// TODO: create a file with dimension names mapping
-const Dashboard = ({ data }) => {
+interface Props {
+    data?: StateData;
+}
+
+const Dashboard = ({ data }: Props) => {
     const classes = useStyles();
     const colPal = Object.values(PALETTES.GREEN_ORANGE);
     return (
@@ -47,7 +51,7 @@ const Dashboard = ({ data }) => {
                                                 date: new Date(`${row.year.key}-${row.month.key}-01`),
                                                 name: row.division.text,
                                                 category: row.division.text,
-                                                value: row.sales.value / 1000,
+                                                value: Number(row?.sales?.value) / 1000,
                                             }))}
                                             size={{ width: 500, height: 250 }}
                                         />}
@@ -59,7 +63,7 @@ const Dashboard = ({ data }) => {
                                         subtitle="Values are in EUR"
                                         color={colPal[0]}
                                         content={<VerticalBarChart
-                                            data={data.sort((a, b) => a.month.key - b.month.key)
+                                            data={data.sort((a, b) => Number(a.month.key) - Number(b.month.key))
                                                 .map(row => ({
                                                     category: row.month.text,
                                                     value: row.sales.value
@@ -93,7 +97,7 @@ const Dashboard = ({ data }) => {
                                     subtitle="Values are in pieces"
                                     description={<span>
                                         This one adjusts bar width responsively to container width. Stolen from the Stack Overflow survey result webpage. 
-                                        <i className="user secret icon" href="/" />
+                                        <i className="user secret icon" />
                                         </span>}
                                     color={colPal[0]}
                                     content={<HorizontalBarChartRespWidth

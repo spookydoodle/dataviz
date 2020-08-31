@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import './App.css';
 import salesService from './services/salesService';
 import dummyData from './constants/dummyData';
+import { State } from './logic/types';
 import Dashboard from './pages/Dashboard';
 
-class App extends Component {
-  constructor(props) {
+class App extends Component<{}, State> {
+  constructor(props: any) {
     super(props);
     this.state = {
+      user: null,
+      whoamiRequestDone: false,
+      mode: "light",
+      data: undefined,
     };
   }
 
