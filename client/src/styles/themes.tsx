@@ -11,9 +11,9 @@ const createTheme = (type: Mode) => {
         palette: {
             type: type,
             primary: {
-                light: type === 'dark' ? '#001845' : '#02A9EA',
-                main: type === 'dark' ? '#001845' : '#3A0CA3',
-                dark: type === 'dark' ? '#001845' : '#1B065E',
+                light: '#7049c9',
+                main: '#3A0CA3',
+                dark: '#1B065E',
                 contrastText: "#FCD5CE",
             },
             secondary: {

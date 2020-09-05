@@ -56,7 +56,7 @@ class App extends Component<{}, State> {
                 />
               </Route>
 
-              <Route exact path={root}>
+              <Route path={root}>
                 <Dashboard
                   user={this.state.user}
                   data={data}

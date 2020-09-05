@@ -43,6 +43,8 @@ class ChartImpl extends Component {
          barColor,
          xFontColor,
          yFontColor,
+         xFontSize,
+         yFontSize,
       } = this.props;
 
 
@@ -67,7 +69,7 @@ class ChartImpl extends Component {
          .selectAll("text")
          .attr("transform", `translate(0, 0)rotate(${yCatAngle})`)
          .style("text-anchor", "end")
-         .style("font-size", 10)
+         .style("font-size", yFontSize)
          .style("fill", yFontColor)
 
       // Add x axis
@@ -78,7 +80,7 @@ class ChartImpl extends Component {
          .selectAll("text")
          .attr("transform", `translate(0, 0)rotate(${xCatAngle})`)
          .style("text-anchor", "end")
-         .style("font-size", 10)
+         .style("font-size", xFontSize)
          .style("fill", xFontColor)
 
       // Add data bars
@@ -91,6 +93,7 @@ class ChartImpl extends Component {
          .attr('height', heightRect)
          .attr('width', widthRect)
          .style('fill', barColor)
+         .style('border-radius', "5px")   // TODO: repair - not working
 
 
 

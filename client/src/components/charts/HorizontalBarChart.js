@@ -5,7 +5,7 @@ import { scaleLinear, scaleBand } from 'd3-scale';
 import { max } from 'd3-array';
 import ChartImpl from './ChartImpl';
 import PALETTES from '../../constants/colors';
-const colors = Object.values(PALETTES.GREEN_ORANGE)
+const colors = Object.values(PALETTES.THEME)
 
 const HorizontalBarChart = ({ data, size, resize }) => {
    const theme = useTheme();
@@ -14,20 +14,21 @@ const HorizontalBarChart = ({ data, size, resize }) => {
    const maxValue = max(values)
 
    // TODO: handle optional props for axis offset from chart borders
-   const offset = { 
-       top: 0, 
-       left: categories.reduce((longestStr, str) => longestStr.length < str.length ? str : longestStr).length * 6, 
+   const offset = {
+      top: 0,
+      left: categories.reduce((longestStr, str) => longestStr.length < str.length ? str : longestStr).length * 6,
        bottom: maxValue.toString().length * 4, 
-       right: 0, 
-    }
-   const margin = {top: 20, left: 20, bottom: 20, right: 20}
+      // bottom: 0,
+      right: 0,
+   }
+   const margin = { top: 20, left: 20, bottom: 20, right: 20 }
    const chartWidth = size.width - margin.left - margin.right - offset.left - offset.right;
    const chartHeight = size.height - margin.left - margin.right - offset.top - offset.bottom;
 
    // Horizontal axis
    const xScale = scaleLinear()
-   .range([0, chartWidth])
-   .domain([0, maxValue])
+      .range([0, chartWidth])
+      .domain([0, maxValue])
 
    // Vertical axis
    const yScale = scaleBand()
@@ -58,9 +59,11 @@ const HorizontalBarChart = ({ data, size, resize }) => {
          resize={resize}
          margin={margin}
          offset={offset}
-         barColor={colors[0]}
+         barColor={theme.palette.primary.main}
          xFontColor={theme.palette.text.primary}
          yFontColor={theme.palette.text.primary}
+         xFontSize={theme.typography.fontSize - 2}
+         yFontSize={theme.typography.fontSize}
       />
    )
 

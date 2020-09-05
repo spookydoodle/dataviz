@@ -4,7 +4,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import ChartImpl from './ChartImpl';
 import PALETTES from '../../constants/colors';
-const colors = Object.values(PALETTES.GREEN_ORANGE)
+const colors = Object.values(PALETTES.THEME)
 
 const VerticalBarChart = ({ data, size, resize }) => {
    const theme = useTheme();
@@ -58,9 +58,11 @@ const VerticalBarChart = ({ data, size, resize }) => {
          resize={resize}
          margin={margin}
          offset={offset}
-         barColor={colors[0]}
+         barColor={theme.palette.primary.main}
          xFontColor={theme.palette.text.primary}
          yFontColor={theme.palette.text.primary}
+         xFontSize={theme.typography.fontSize}
+         yFontSize={theme.typography.fontSize - 2}
       />
    )
 

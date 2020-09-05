@@ -206,7 +206,7 @@ class BarChartRace extends Component {
 
         function color(d) {
             // const scale = scaleOrdinal(schemeTableau10);
-            const scale = scaleOrdinal(Object.values(PALETTES.GREEN_ORANGE));
+            const scale = scaleOrdinal(Object.values(PALETTES.THEME));
             if (data.some(d => d.category !== undefined)) {
                 const categoryByName = new Map(data.map(d => [d.name, d.category]))
                 
