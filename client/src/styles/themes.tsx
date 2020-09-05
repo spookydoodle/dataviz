@@ -3,13 +3,6 @@
 */
 import { Mode } from '../logic/types';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
-import { fade, makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
-
-// Below components need to be imported to correctly overwrite styles with classes in useStyle
-import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
-// const header = require('../img/landing/header-1.jpg');
-// const header2 = require('../img/landing/header-2.jpg');
 
 // Wrapper for the function in order to pass type parameter.
 // Requires defining 'const theme' in components which make use of it. See Layout.tsx
@@ -18,52 +11,52 @@ const createTheme = (type: Mode) => {
         palette: {
             type: type,
             primary: {
-                light: '#705D56',
-                main: '#32292F',
-                dark: '#32292F',
-                // contrastText: "#EAE2B7",
+                light: '#02A9EA',
+                main: '#3A0CA3',
+                dark: '#1B065E',
+                contrastText: "#F7EDF0",
             },
             secondary: {
-                light: '#99E1D9',
-                main: '#70ABAF',
-                dark: '#70ABAF',
-                // contrastText: color4,
+                light: '#DF7373',
+                main: '#CC444B',
+                dark: '#89023E',
+                contrastText: "#F7EDF0",
             },
             common: {
                 black: '#000',
                 white: '#fff',
             },
             background: {
-                paper: type === 'dark' ? '#372549' : '#F0F7F4',
-                default: type === 'dark' ? '#1A1423' : '#C5ECE7',
+                paper: type === 'dark' ? '#372549' : '#F8EDEB',
+                default: type === 'dark' ? '#1A1423' : '#FCD5CE',
             },
             error: {
-                light: '#e57373',
-                main: '#CE4257',
-                dark: '#d32f2f',
-                contrastText: '#fff',
+                light: '#BF0603',
+                main: '#8D0801',
+                dark: '#8D0801',
+                contrastText: '#EDF2F4',
             },
             warning: {
-                light: '#ffb74d',
-                main: '#ff9800',
-                dark: '#f57c00',
-                contrastText: '#rgba(0, 0, 0, 0.87',
+                light: '#F9DCC4',
+                main: '#FEC89A',
+                dark: '#AD735F',
+                contrastText: '#F8EDEB',
             },
             info: {
-                light: '#64b5f6',
-                main: '#2196f3',
-                dark: '#1976d2',
-                contrastText: '#fff',
+                light: '#90B5E0',
+                main: '#90B5E0',
+                dark: '#90B5E0',
+                contrastText: 'rgba(255, 255, 255, .87)',
             },
             success: {
-                light: '#81c784',
-                main: '#4caf50',
-                dark: '#388e3c',
-                contrastText: '#rgba(0, 0, 0, 0.87',
+                light: '#95D5B2',
+                main: '#74C69D',
+                dark: '#40916C',
+                contrastText: '#D8F3DC',
             },
             text: {
-                primary: type === 'dark' ? 'rgba(255, 255, 255, .87)' : '#32292F',
-                secondary: type === 'dark' ? 'rgba(255, 255, 255, .6)' : '#705D56',
+                primary: type === 'dark' ? 'rgba(255, 255, 255, .87)' : '#CC444B',
+                secondary: type === 'dark' ? 'rgba(255, 255, 255, .6)' : '#E39695',
                 disabled: 'rgba(133, 30, 30, 0.38)',
                 hint: 'rgba(0, 0, 0, 0.38)',
             },
