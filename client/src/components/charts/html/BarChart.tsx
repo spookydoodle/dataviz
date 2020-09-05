@@ -42,36 +42,32 @@ const BarChart = ({
     // Do not show rows, where category is unassigned
     data = data.filter(row => row.category && row.category !== "");
 
+    const scrollProps = {
+        containerId: scrollID,
+        duration: 1000,
+    };
     const scrollToBottom = () => {
-        animateScroll.scrollToBottom({
-            containerId: scrollID,
-            duration: 1000,
-        });
+        animateScroll.scrollToBottom(scrollProps);
     }
 
     const scrollToTop = () => {
-        animateScroll.scrollToTop({
-            containerId: scrollID,
-            duration: 100,
-        });
+        animateScroll.scrollToTop(scrollProps);
     }
 
-
+    let [top, setTop] = useState(true);
     const runScroll = () => {
 
         if (variant === "scroll") {
-            scrollToTop();
-
-            // Scroll only if total number of rows is > 10
-            const timeout = setTimeout(() => {
+            const interval = setInterval(() => {
                 if (play && (maxRows || data.length > 10)) {
-                    scrollToBottom()
+                    top ? scrollToBottom() : scrollToTop()
+                    setTop(!top)
                 }
             }, duration / 2 - 1000);
 
             // Returning a function in useEffect is equivilent of componentWillUnmount in a React Class
             return () => {
-                clearTimeout(timeout);
+                clearTimeout(interval);
             };
         }
 
@@ -105,7 +101,7 @@ const BarChart = ({
         // <Box className={(variant === "fade" && show) ? classes.fadeIn : classes.fadeOut}>
         <Box
             id={scrollID}
-            className={`${type === "abs-delta" ? classes.chartContainer : classes.chartContainerSm}`}
+            className={classes.chartContainer}
         >
             <Grid
                 container
@@ -120,7 +116,7 @@ const BarChart = ({
                     type === "abs" ? (
                         <BarChartRowAbs
                             key={`chart-bar-${i}-${row.value}`}
-                            i={i + 1}
+                            i={i}
                             category={row.category}
                             filler={row.filler}
                             value={row.value}
@@ -132,7 +128,7 @@ const BarChart = ({
                     ) : (
                             <BarChartRowAbsDelta
                                 key={`chart-bar-${i}-${row.value}`}
-                                i={i + 1}
+                                i={i}
                                 category={row.category}
                                 filler={row.filler}
                                 value={row.value}

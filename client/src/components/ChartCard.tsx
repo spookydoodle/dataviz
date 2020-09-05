@@ -19,7 +19,7 @@ const Dashboard = ({
 }: Props) => {
     const classes = useStyles();
     return (
-        <Card>
+        <Card style={{height: "100%"}}>
             <CardHeader
                 title={title}
                 subheader={subtitle}

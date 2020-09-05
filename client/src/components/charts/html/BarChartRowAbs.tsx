@@ -60,14 +60,14 @@ const BarChartRowAbs = ({
                     <Typography
                         component="span"
                         color="primary"
-                        variant="body1"
+                        variant="body2"
                         noWrap
                         className={`${classes.labels} ${classes.category}`}
                     >
                         <Typography
                             component="span"
                             color="textSecondary"
-                            variant="body1"
+                            variant="body2"
                             noWrap
                             className={`${classes.labels} ${classes.category} ${classes.rank}`}
                         >{`#${i + 1} `}</Typography>{category}

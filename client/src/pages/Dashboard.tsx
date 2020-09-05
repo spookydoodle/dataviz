@@ -110,9 +110,9 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                             />
                         </Grid>
 
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12}>
                             <ChartCard
-                                title="Ordered quantity by division"
+                                title="Quantity by division"
                                 subtitle="Values are in pieces"
                                 description={<span>
                                     This one adjusts bar width responsively to container width. Stolen from the Stack Overflow survey result webpage.
@@ -120,7 +120,7 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                 </span>}
                                 color={colPal[0]}
                                 content={<HorizontalBarChartRespWidth
-                                    data={data.filter((row, i) => i < 15).map(row => ({
+                                    data={data.filter((row, i) => i < 10).map(row => ({
                                         category: `${row.division.text}`,
                                         value: Number(row.qty.value)
                                     }))}
@@ -128,14 +128,16 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                 />}
                             />
                         </Grid>
-
-                        <Grid item xs={12} md={6}>
+                        
+                        {/* TODO: Add counter to when the scroll happens */}
+                        {/* TODO: Repair responsiveness */}
+                        {/* TODO: Add a selector fo changing - constant slow scrolling or fast and stay */}
+                        <Grid item xs={12} lg={6}>
                             <ChartCard
-                                title="Ordered quantity by country-division-month"
-                                subtitle="Values are in pieces"
+                                title="Index of awesomeness by country"
+                                subtitle="No unit"
                                 description={<span>
-                                    This one adjusts bar width responsively to container width. Stolen from the Stack Overflow survey result webpage.
-                                        <i className="user secret icon" />
+                                    This one scrolls up and down and up and down and up and down.
                                 </span>}
                                 color={colPal[0]}
                                 content={<BarChart
@@ -147,19 +149,18 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                         data={data.filter((row, i) => i < 20).map(row => ({
                                             category: `${row.country.text}`,
                                             value: Number(row.qty.value),
-                                            delta: Math.random() * 1000 - Math.random() * 1000,
+                                            delta: Math.random() * 100 - Math.random() * 100,
                                         }))}
                                     />}
                             />
                         </Grid>
-                        
-                        <Grid item xs={12} md={6}>
+
+                        <Grid item xs={12} lg={6}>
                             <ChartCard
-                                title="Ordered quantity by country-division-month"
-                                subtitle="Values are in pieces"
+                                title="Some important measure by product group"
+                                subtitle="Values are in m2"
                                 description={<span>
-                                    This one adjusts bar width responsively to container width. Stolen from the Stack Overflow survey result webpage.
-                                        <i className="user secret icon" />
+                                    Compare numbers with their targets and judge if the progress is as it was supposed to be.
                                 </span>}
                                 color={colPal[0]}
                                 content={<BarChart
@@ -169,9 +170,9 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                         type="abs-delta"
                                         categorySize="md"
                                         data={data.filter((row, i) => i < 20).map(row => ({
-                                            category: `${row.country.text}`,
+                                            category: `${row.division.text}`,
                                             value: Number(row.qty.value),
-                                            delta: Math.random() * 1000 - Math.random() * 1000,
+                                            delta: Math.random() * 100 - Math.random() * 100,
                                         }))}
                                     />}
                             />

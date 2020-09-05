@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
         chartContainer: {
             width: "100%",
             // maxHeight: `${(rowFontSize + 2 * rowMargin) * 10}vh`,
-            maxHeight: `24em`,
+            maxHeight: `19.5em`,
             // maxHeight: `36vh`,
             overflow: "hidden",
             paddingLeft: "1em",

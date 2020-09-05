@@ -27,9 +27,9 @@ const createTheme = (type: Mode) => {
                 default: type === 'dark' ? '#001233' : '#FCD5CE',
             },
             error: {
-                light: '#BF0603',
-                main: '#8D0801',
-                dark: '#8D0801',
+                light: '#EF576A',
+                main: '#EF233C',
+                dark: '#B3001B',
                 contrastText: '#EDF2F4',
             },
             warning: {

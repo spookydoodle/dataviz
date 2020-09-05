@@ -24,16 +24,16 @@ interface Props {
 }
 
 
-const BarChartRowAbsDelta = ({ 
-    i, 
-    category, 
-    filler, 
-    value, 
-    delta, 
-    max, 
-    scaling = 1, 
+const BarChartRowAbsDelta = ({
+    i,
+    category,
+    filler,
+    value,
+    delta,
+    max,
+    scaling = 1,
     decimals = 0,
-    absPosition, 
+    absPosition,
     rankColor = "primary",
     categorySize = "md",
 }: Props) => {
@@ -49,25 +49,27 @@ const BarChartRowAbsDelta = ({
             direction="row"
             className={`${classes.row} ${filler && classes.hide}`}
         >
-
             <Grid
                 container
                 item xs={5}
+                justify="space-between"
             >
-                <Typography
-                    component="span"
-                    color="primary"
-                    noWrap
-                    variant="body1"
-                    className={`${classes.labels} ${classes.category} ${classes.padding}`}
-                >
+                <Grid item>
                     <Typography
                         component="span"
-                        color="textSecondary"
-                        variant="body1"
-                        className={`${classes.labels} ${classes.category} ${classes.rank} ${classes.padding}`}
-                    >{`#${i + 1} `}</Typography>{category}
-                </Typography>
+                        color="primary"
+                        noWrap
+                        variant="body2"
+                        className={`${classes.labels} ${classes.category} ${classes.padding}`}
+                    >
+                        <Typography
+                            component="span"
+                            color="textSecondary"
+                            variant="body2"
+                            className={`${classes.labels} ${classes.category} ${classes.rank} ${classes.padding}`}
+                        >{`#${i + 1} `}</Typography>{category}
+                    </Typography>
+                </Grid>
             </Grid>
 
             {/* Prop 'absPosition' determines where labels behind the bars representing absolute values are positioned 
@@ -98,10 +100,10 @@ const BarChartRowAbsDelta = ({
                     justify="flex-start"
                     xs={1}
                 >
-                    <Typography 
-                        color="primary" 
+                    <Typography
+                        color="primary"
                         variant="body2"
-                        noWrap 
+                        noWrap
                         className={`${classes.labels} ${classes.label}`}
                     >
                         {value ? `${formatNumber(value, scaling, decimals)}` : "0.0"}
