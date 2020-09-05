@@ -2,20 +2,27 @@ import React from 'react';
 import { useStyles } from '../styles/main';
 import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 
+interface Props {
+    title: string;
+    subtitle: string;
+    description?: any;
+    color: string;
+    content: any;
+}
 
 const Dashboard = ({
     title,
     subtitle,
     description = undefined,
     color,
-    content }) => {
+    content 
+}: Props) => {
     const classes = useStyles();
     return (
-        <Card style={{ height: "100%" }}>
+        <Card>
             <CardHeader
                 title={title}
                 subheader={subtitle}
-                style={{ color: { color } }}
             />
 
             {description ? <CardContent>

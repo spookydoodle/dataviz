@@ -3,10 +3,11 @@ import { useStyles } from '../styles/main';
 import { LinearBuffer } from '../components/Loading';
 import { Grid, } from '@material-ui/core';
 import AppLayout from '../layouts/AppLayout';
-import HorizontalBarChart from '../components/charts/HorizontalBarChart'
-import VerticalBarChart from '../components/charts/VerticalBarChart'
-import BarChartRace from '../components/charts/BarChartRace'
-import HorizontalBarChartRespWidth from '../components/charts/HorizontalBarChartRespWidth'
+import HorizontalBarChart from '../components/charts/d3/HorizontalBarChart';
+import VerticalBarChart from '../components/charts/d3/VerticalBarChart';
+import BarChartRace from '../components/charts/d3/BarChartRace';
+import HorizontalBarChartRespWidth from '../components/charts/html/HorizontalBarChartRespWidth';
+import BarChart from '../components/charts/html/BarChart';
 // import moment from 'moment';
 import PALETTES from '../constants/colors';
 import ChartCard from '../components/ChartCard';
@@ -76,10 +77,12 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                     subtitle="Values are in EUR"
                                     color={colPal[0]}
                                     content={<VerticalBarChart
-                                        data={data.sort((a, b) => Number(a.month.key) - Number(b.month.key))
+                                        data={data.sort((a, b) => a.month.key < b.month.key ? -1 : (
+                                            a.month.key > b.month.key ? 1 : 0
+                                        ))
                                             .map(row => ({
                                                 category: row.month.text,
-                                                value: row.sales.value
+                                                value: Number(row.sales.value)
                                             }))}
                                         size={{ width: 500, height: 250 }}
                                         resize="responsive"
@@ -97,14 +100,36 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                     data={data.sort((a, b) =>
                                         a.country.text < b.country.text ? -1
                                             : (a.country.text > b.country.text ? 1 : 0))
-                                        .map(row => ({ category: row.country.text, value: row.qty.value }))}
+                                        .map(row => ({
+                                            category: row.country.text,
+                                            value: Number(row.qty.value)
+                                        }))}
                                     size={{ width: 350, height: 600 }}
                                     resize="responsive"
                                 />}
                             />
                         </Grid>
 
-                        <Grid item xs={12}>
+                        <Grid item xs={12} md={6}>
+                            <ChartCard
+                                title="Ordered quantity by division"
+                                subtitle="Values are in pieces"
+                                description={<span>
+                                    This one adjusts bar width responsively to container width. Stolen from the Stack Overflow survey result webpage.
+                                        <i className="user secret icon" />
+                                </span>}
+                                color={colPal[0]}
+                                content={<HorizontalBarChartRespWidth
+                                    data={data.filter((row, i) => i < 15).map(row => ({
+                                        category: `${row.division.text}`,
+                                        value: Number(row.qty.value)
+                                    }))}
+                                    color={colPal[0]}
+                                />}
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} md={6}>
                             <ChartCard
                                 title="Ordered quantity by country-division-month"
                                 subtitle="Values are in pieces"
@@ -113,10 +138,42 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                         <i className="user secret icon" />
                                 </span>}
                                 color={colPal[0]}
-                                content={<HorizontalBarChartRespWidth
-                                    data={data.filter((row, i) => i < 15).map(row => ({ category: `${row.country.text} - ${row.division.text} - ${row.month.text}`, value: row.qty.value }))}
-                                    color={colPal[0]}
-                                />}
+                                content={<BarChart
+                                        id="abs"
+                                        play={true}
+                                        variant="scroll"
+                                        type="abs"
+                                        categorySize="md"
+                                        data={data.filter((row, i) => i < 20).map(row => ({
+                                            category: `${row.country.text}`,
+                                            value: Number(row.qty.value),
+                                            delta: Math.random() * 1000 - Math.random() * 1000,
+                                        }))}
+                                    />}
+                            />
+                        </Grid>
+                        
+                        <Grid item xs={12} md={6}>
+                            <ChartCard
+                                title="Ordered quantity by country-division-month"
+                                subtitle="Values are in pieces"
+                                description={<span>
+                                    This one adjusts bar width responsively to container width. Stolen from the Stack Overflow survey result webpage.
+                                        <i className="user secret icon" />
+                                </span>}
+                                color={colPal[0]}
+                                content={<BarChart
+                                        id="absDelta"
+                                        play={true}
+                                        variant="scroll"
+                                        type="abs-delta"
+                                        categorySize="md"
+                                        data={data.filter((row, i) => i < 20).map(row => ({
+                                            category: `${row.country.text}`,
+                                            value: Number(row.qty.value),
+                                            delta: Math.random() * 1000 - Math.random() * 1000,
+                                        }))}
+                                    />}
                             />
                         </Grid>
                     </Grid>

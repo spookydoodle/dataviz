@@ -1,15 +1,39 @@
 
 import React, { Component } from 'react';
-import { Box } from '@material-ui/core';
-import { useStyles } from '../../styles/main';
-import { scaleLinear, scaleBand } from 'd3-scale';
 import { axisLeft, axisBottom } from 'd3-axis';
-import { max } from 'd3-array';
 import { select } from 'd3-selection';
+import { Size, Position } from '../../../logic/datavizTypes';
 
-// TODO: implement minHeight, minWidth, scroll within a card, padding and margin on chart, max length of a category name
-class ChartImpl extends Component {
-   constructor(props) {
+interface Props {
+   categories: Array<string>;
+   values: Array<number>;
+   chartHeight: number;
+   chartWidth: number;
+   // xScale: AxisScale<AxisDomain> | ScaleBand<string> | ScaleLinear<number, number>;
+   // yScale: AxisScale<AxisDomain> | ScaleBand<string> | ScaleLinear<number, number>;
+   xScale?: any;
+   yScale?: any;
+   xRect: (d: number, i: number) => number;
+   yRect: (d: number, i: number) => number;
+   widthRect: (d: number) => number;
+   heightRect: (d: number) => number;
+   xCatAngle: number;
+   yCatAngle: number;
+   size: Size;
+   resize?: "fixed" | "responsive";
+   margin: Position;
+   offset: Position;
+   barColor: string;
+   xFontColor: string;
+   yFontColor: string;
+   xFontSize: number;
+   yFontSize: number;
+}
+
+class ChartImpl extends Component<Props, {}> {
+   node: any
+
+   constructor(props: Props) {
       super(props)
       this.createBarChart = this.createBarChart.bind(this)
    }
@@ -48,21 +72,22 @@ class ChartImpl extends Component {
       } = this.props;
 
 
+      const chart = select(node);
 
-      const chart = select(node)
+      // // Add responsiveness to the chart based on the 'resize' parameter, by default fixed size
+      // if (resize === "responsive") {
+      //    chart.attr("viewBox", [0, -20, size.width, size.height])
+      //       .attr("preserveAspectRatio", "xMidYMid meet");
+      // }
 
-      // Add responsiveness to the chart based on the 'resize' parameter, by default fixed size
-      if (resize === "responsive") 
-         chart
-            .attr("viewBox", [0, -20, this.props.size.width, this.props.size.height])
-            .attr("preserveAspectRatio", "xMidYMid meet")
-      
+
+
       // Add margin to the whole chart
       chart.append('g')
          .attr('transform', `translate(${margin.top}, ${margin.left})`)
 
       // Add y axis
-      chart.append('g')
+      if (yScale) chart.append('g')
          .call(axisLeft(yScale))
          .attr('transform', `translate(${offset.left}, 0)`)
          // TODO: move to a separate method
@@ -73,7 +98,7 @@ class ChartImpl extends Component {
          .style("fill", yFontColor)
 
       // Add x axis
-      chart.append('g')
+      if (xScale) chart.append('g')
          .attr('transform', `translate(${offset.left}, ${chartHeight})`)
          .call(axisBottom(xScale))
          // TODO: move to a separate method
@@ -93,9 +118,6 @@ class ChartImpl extends Component {
          .attr('height', heightRect)
          .attr('width', widthRect)
          .style('fill', barColor)
-         .style('border-radius', "5px")   // TODO: repair - not working
-
-
 
    }
 
@@ -104,8 +126,7 @@ class ChartImpl extends Component {
          <svg
             ref={node => this.node = node}
             width={this.props.size.width}
-            height={this.props.size.height}
-         >
+            height={this.props.size.height}>
          </svg>
       )
    }

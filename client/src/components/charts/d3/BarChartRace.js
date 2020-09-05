@@ -2,14 +2,14 @@
 import React, { Component } from 'react';
 import { scaleLinear, scaleBand, scaleOrdinal } from 'd3-scale';
 import { axisTop } from 'd3-axis';
-import { max, groups, pairs, range, rollup, ascending, descending } from 'd3-array';
+import { groups, pairs, range, rollup, ascending, descending } from 'd3-array';
 import { interpolateNumber } from 'd3-interpolate';
 import { select } from 'd3-selection';
 import { format } from 'd3-format';
 import { utcFormat } from 'd3-time-format';
 import { easeLinear } from 'd3-ease';
 import { transition } from 'd3-transition';
-import PALETTES from '../../constants/colors';
+import PALETTES from '../../../constants/colors';
 
 class BarChartRace extends Component {
     constructor(props) {

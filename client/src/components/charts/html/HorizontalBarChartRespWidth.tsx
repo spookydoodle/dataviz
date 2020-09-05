@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Typography, List, ListItem, ListItemText } from '@material-ui/core';
+import { Box, Typography, List, ListItem } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { BarChartData } from '../../../logic/datavizTypes';
 
 const useStyles = makeStyles(theme => ({
     barSet: {
@@ -83,7 +84,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const HorizontalBarChartRespWidth = ({ data, color }) => {
+interface Props {
+    data: BarChartData;
+    color: string;
+}
+
+const HorizontalBarChartRespWidth = ({ data, color }: Props) => {
     const classes = useStyles();
     const theme = useTheme();
     const max = Math.max(...data.map(row => row.value))

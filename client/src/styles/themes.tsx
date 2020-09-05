@@ -66,4 +66,14 @@ const createTheme = (type: Mode) => {
     return responsiveFontSizes(theme);
 };
 
-export { createTheme };
+
+const fontSizes = {
+    primary: "3.5vh",
+    secondary: "3vh",
+    tertiary: "2.5vh",
+    quaternary: "2.25vh",
+    quinary: "2vh",
+    senary: "1.75vh",
+}
+
+export { createTheme, fontSizes };
