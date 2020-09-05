@@ -1,11 +1,13 @@
 
 import React from 'react';
+import { useTheme } from '@material-ui/core/styles';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import ChartImpl from './ChartImpl';
 import PALETTES from '../../constants/colors';
 const colors = Object.values(PALETTES.GREEN_ORANGE)
 
 const VerticalBarChart = ({ data, size, resize }) => {
+   const theme = useTheme();
    const values = data.map(row => row.value)
    const categories = data.map(row => row.category)
    // const maxValue = max(values)
@@ -57,8 +59,8 @@ const VerticalBarChart = ({ data, size, resize }) => {
          margin={margin}
          offset={offset}
          barColor={colors[0]}
-         xFontColor="#404040"
-         yFontColor="#404040"
+         xFontColor={theme.palette.text.primary}
+         yFontColor={theme.palette.text.primary}
       />
    )
 

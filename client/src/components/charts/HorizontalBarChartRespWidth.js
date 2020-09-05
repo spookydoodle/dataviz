@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box, Typography, List, ListItem, ListItemText } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     barSet: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     barLabel: {
         boxSizing: 'border-box',
         paddingRight: '15px',
-        marginTop: '3px',
+        // marginTop: '3px',
         width: '44%',
         display: 'inline-block',
         float: 'left',
@@ -70,33 +71,46 @@ const useStyles = makeStyles(theme => ({
     bar: {
         border: '2px solid #000',
         marginTop: '2px',
-        height: '14px',
+        height: '25px',
+        borderRadius: "2px",
         content: '',
         lineHeight: '16px',
         textAlign: 'right',
         paddingTop: '1px',
-        color: '#005999',
+        color: theme.palette.primary.main,
+        backgroundColor: theme.palette.primary.main, 
+        borderColor:  theme.palette.primary.main 
     }
 }));
 
 const HorizontalBarChartRespWidth = ({ data, color }) => {
     const classes = useStyles();
+    const theme = useTheme();
     const max = Math.max(...data.map(row => row.value))
 
     return (
-        <div className={classes.barSet} style={{ color: color }}>
+        <Box className={classes.barSet} style={{ color: color }}>
             {data.sort((a, b) => b.value - a.value)
                 .map((row, i) =>
-                    <div key={`chart-bar-${i}`} className={classes.barRow}>
-                        <div className={classes.barLabel}>{row.category}</div>
-                        <div className={`${classes.barLabel} ${classes.barLabel2}`}>{row.value}</div>
-                        <ul className={classes.list}>
-                            <li style={{ width: `${row.value / max * 100}%`, backgroundColor: color, borderColor: color }} className={classes.bar}></li>
-                        </ul>
-                    </div>
+                    <Box key={`chart-bar-${i}`} className={classes.barRow}>
+                        <Typography color="textPrimary" className={classes.barLabel}>
+                            {row.category}
+                        </Typography>
+                        <Typography color="textPrimary" className={`${classes.barLabel} ${classes.barLabel2}`}>
+                            {/* <Typography color="textPrimary"> */}
+                                {row.value}
+                            {/* </Typography> */}
+                        </Typography>
+                        <List className={classes.list}>
+                            <ListItem 
+                                style={{ width: `${row.value / max * 100}%` }} 
+                                className={classes.bar} 
+                            />
+                        </List>
+                    </Box>
 
                 )}
-        </div>
+        </Box>
     )
 };
 

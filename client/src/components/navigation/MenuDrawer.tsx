@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Link } from '../../utils/Link';
 import { Drawer, List, ListItem, ListItemText, ListItemIcon, Divider, IconButton, Hidden } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme: Theme) =>
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
     },
+    colorTextPrimary: {
+        color: theme.palette.text.primary,
+    }
   }),
 );
 
@@ -128,10 +131,10 @@ const MenuDrawer = ({ user, variant = 'temporary', mode, setMode, open, handleDr
                 </IconButton>
             </div>
             <Divider />
-            <List>
+            <List >
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon color="secondary" /> : <MailIcon color="secondary" />}</ListItemIcon>
+                        <ListItemIcon className={classes.colorTextPrimary}>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -140,7 +143,7 @@ const MenuDrawer = ({ user, variant = 'temporary', mode, setMode, open, handleDr
             <List>
                 {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon color="secondary" /> : <MailIcon color="secondary" />}</ListItemIcon>
+                        <ListItemIcon className={classes.colorTextPrimary}>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}

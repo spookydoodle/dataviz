@@ -170,7 +170,6 @@ const useStyles = makeStyles((theme: Theme) =>
         vertMargin: {
             marginBottom: '10px',
         },
-
         // Texts
         textColorLight: {
             color: theme.palette.primary.light,

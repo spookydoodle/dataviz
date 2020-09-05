@@ -1,16 +1,14 @@
 
-import React, { Component } from 'react';
-import { Box } from '@material-ui/core';
-import { useStyles } from '../../styles/main';
+import React from 'react';
+import { useTheme } from '@material-ui/core/styles';
 import { scaleLinear, scaleBand } from 'd3-scale';
-import { axisLeft, axisBottom } from 'd3-axis';
 import { max } from 'd3-array';
-import { select } from 'd3-selection';
 import ChartImpl from './ChartImpl';
 import PALETTES from '../../constants/colors';
 const colors = Object.values(PALETTES.GREEN_ORANGE)
 
 const HorizontalBarChart = ({ data, size, resize }) => {
+   const theme = useTheme();
    const values = data.map(row => row.value)
    const categories = data.map(row => row.category)
    const maxValue = max(values)
@@ -61,8 +59,8 @@ const HorizontalBarChart = ({ data, size, resize }) => {
          margin={margin}
          offset={offset}
          barColor={colors[0]}
-         xFontColor="#404040"
-         yFontColor="#404040"
+         xFontColor={theme.palette.text.primary}
+         yFontColor={theme.palette.text.primary}
       />
    )
 
