@@ -104,7 +104,7 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                             category: row.country.text,
                                             value: Number(row.qty.value)
                                         }))}
-                                    size={{ width: 350, height: 600 }}
+                                    size={{ width: 500, height: 600 }}
                                     resize="responsive"
                                 />}
                             />

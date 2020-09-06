@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core';
-import { useStyles } from '../../../styles/main';
 import { scaleLinear, scaleBand } from 'd3-scale';
-import { axisLeft, axisBottom } from 'd3-axis';
 import { max } from 'd3-array';
-import { select } from 'd3-selection';
 import ChartImpl from './ChartImpl';
 import { BarChart } from '../../../logic/datavizTypes';
 
@@ -17,8 +13,9 @@ const HorizontalBarChart = ({ data, size, resize, color }: BarChart) => {
    // TODO: handle optional props for axis offset from chart borders
    const offset = {
       top: 0,
-      left: categories.reduce((longestStr, str) => longestStr.length < str.length ? str : longestStr).length * 6,
-      bottom: maxValue ? maxValue.toString().length * 4 : 40,
+      left: categories.reduce((longestStr, str) => longestStr.length < str.length ? str : longestStr).length * 7,
+      // bottom: maxValue ? maxValue.toString().length * 4 : 40,
+      bottom: 0,
       right: 0,
    }
    const margin = { top: 20, left: 20, bottom: 20, right: 20 }
@@ -38,20 +35,29 @@ const HorizontalBarChart = ({ data, size, resize, color }: BarChart) => {
    const xRect = (d: number, i: number) => offset.left + xScale(0)
    const yRect = (d: number, i: number) => 0.05 * yScale.bandwidth() + (yScale(categories[i]) || 0);
    const heightRect = (d: number) => 0.9 * yScale.bandwidth()
+   
+   // For Labels by bars
+   const yRectLabel = (d: number, i: number) => (yScale(categories[i]) || 0) + yScale.bandwidth() / 2
    const widthRect = (d: number) => xScale(d)
+   const widthRectLabel = (d: number) => xScale(d) - xScale(0)
 
 
    return (
       <ChartImpl
+         type="horizontal"
          categories={categories}
          values={values}
          chartHeight={chartHeight}
          chartWidth={chartWidth}
-         // xScale={xScale}
+         xScale={xScale}
          yScale={yScale}
+         showXScale={false}
+         showYScale={true}
          xRect={xRect}
          yRect={yRect}
          widthRect={widthRect}
+         widthRectLabel={widthRectLabel}
+         yRectLabel={yRectLabel}
          heightRect={heightRect}
          xCatAngle={-45}
          yCatAngle={0}

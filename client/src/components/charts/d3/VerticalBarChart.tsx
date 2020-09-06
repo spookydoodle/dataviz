@@ -39,12 +39,15 @@ const VerticalBarChart = ({ data, size }: BarChart) => {
 
    return (
       <ChartImpl
+         type="vertical"
          categories={categories}
          values={values}
          chartHeight={chartHeight}
          chartWidth={chartWidth}
          xScale={xScale}
          yScale={yScale}
+         showXScale={true}
+         showYScale={true}
          xRect={xRect}
          yRect={yRect}
          widthRect={widthRect}
