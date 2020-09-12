@@ -36,7 +36,7 @@ class App extends Component<{}, State> {
     const { whoamiRequestDone, user, notifications, data } = this.state;
 
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <ScrollToTop>
           <div className="App">
             <Switch>
@@ -46,7 +46,7 @@ class App extends Component<{}, State> {
                 The order matters - the most generic paths should
                 be at the very end.
               */}
-              <Route path={process.env.PUBLIC_URL + '/'}>
+              <Route path="/">
                 <Dashboard
                   user={this.state.user}
                   data={data}
