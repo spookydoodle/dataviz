@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, List, ListItem } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { BarChartData } from '../../../logic/datavizTypes';
+import { aggregate } from '../d3/aggregate';
 
 const useStyles = makeStyles(theme => ({
     barSet: {
@@ -79,8 +80,8 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'right',
         paddingTop: '1px',
         color: theme.palette.primary.main,
-        backgroundColor: theme.palette.primary.main, 
-        borderColor:  theme.palette.primary.main 
+        backgroundColor: theme.palette.primary.main,
+        borderColor: theme.palette.primary.main
     }
 }));
 
@@ -92,6 +93,20 @@ interface Props {
 const HorizontalBarChartRespWidth = ({ data, color }: Props) => {
     const classes = useStyles();
     const theme = useTheme();
+
+    // Aggregate value and targetValue, calculate delta and filter out unassigned category
+    data = aggregate(data.map(row => ({
+        category: row.category,
+        value: row.value,
+        targetValue: row.targetValue
+    })))
+        .map(row => ({
+            ...row,
+            delta: row.value && row.targetValue && row.value !== 0 && row.targetValue !== 0 ? (
+                (row.value - row.targetValue) / row.targetValue * 100
+            ) : undefined
+        }))
+        .filter(row => row.category && row.category !== "");
     const max = Math.max(...data.map(row => row.value))
 
     return (
@@ -104,13 +119,13 @@ const HorizontalBarChartRespWidth = ({ data, color }: Props) => {
                         </Typography>
                         <Typography color="textPrimary" className={`${classes.barLabel} ${classes.barLabel2}`}>
                             {/* <Typography color="textPrimary"> */}
-                                {row.value}
+                            {row.value}
                             {/* </Typography> */}
                         </Typography>
                         <List className={classes.list}>
-                            <ListItem 
-                                style={{ width: `${row.value / max * 100}%` }} 
-                                className={classes.bar} 
+                            <ListItem
+                                style={{ width: `${row.value / max * 100}%` }}
+                                className={classes.bar}
                             />
                         </List>
                     </Box>

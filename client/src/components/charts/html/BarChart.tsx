@@ -10,6 +10,7 @@ import {
 import BarChartRowAbs from './BarChartRowAbs';
 import BarChartRowAbsDelta from './BarChartRowAbsDelta';
 import { BarChartData } from '../../../logic/datavizTypes';
+import { aggregate } from '../d3/aggregate';
 
 interface Props {
     id?: string;
@@ -36,11 +37,25 @@ const BarChart = ({
     categorySize
 }: Props) => {
     const classes = useStyles();
-    const max = Math.max(...data.map(row => row.value))
-    const scrollID = `scroll-container-${id ? id : 'bottom'}`
 
-    // Do not show rows, where category is unassigned
-    data = data.filter(row => row.category && row.category !== "");
+    // Aggregate value and targetValue, calculate delta and filter out unassigned category
+    data = aggregate(data.map(row => ({
+        category: row.category,
+        value: row.value,
+        targetValue: row.targetValue
+    })))
+        .map(row => ({
+            ...row,
+            delta: row.value && row.targetValue && row.value !== 0 && row.targetValue !== 0 ? (
+                (row.value - row.targetValue) / row.targetValue * 100
+            ) : undefined
+        }))
+        .filter(row => row.category && row.category !== "");
+
+    const max = Math.max(...data.map(row => row.value))
+
+    // Scroll ID needs to be provided for the automatic scroll to work
+    const scrollID = `scroll-container-${id ? id : 'bottom'}`
 
     const scrollProps = {
         containerId: scrollID,
@@ -54,51 +69,25 @@ const BarChart = ({
         animateScroll.scrollToTop(scrollProps);
     }
 
+    // Automatically scroll the chart to bottom, then top. 
+    // Duration determines how long the chart is not moving
     let [top, setTop] = useState(true);
-    const runScroll = () => {
 
+    useEffect(() => {
         if (variant === "scroll") {
             const interval = setInterval(() => {
                 if (play && (maxRows || data.length > 10)) {
                     top ? scrollToBottom() : scrollToTop()
-                    setTop(!top)
+                    setTop(prev => !prev)
                 }
             }, duration / 2 - 1000);
 
             // Returning a function in useEffect is equivilent of componentWillUnmount in a React Class
-            return () => {
-                clearTimeout(interval);
-            };
+            return () => clearTimeout(interval);
         }
+    }, []);
 
-    }
-
-
-    // This chart is intended to show 10 bars at once and then scroll to the next 10
-    // class 'chartContainer' uses property 'maxHeight' = 10 * row fontSize and 'overflow' = hidden (or auto) 
-    // to create a scroll panel
-    // TODO: change fade classes to react-spring
-    useEffect(() => {
-        runScroll()
-    }, [data]);
-
-    // This filler is added to the rendered array in order to always have 10 elements in the scrollable container
-    // This way the charts will be aligned as both brands can have different number of divisions or countries
-    // If filler rows are not provided, fill to the closest 10*N
-    const fillerArr = (maxRows || data.length % 10 !== 0) ? new Array(maxRows ? (maxRows - data.length) : 10 - data.length % 10)
-        .fill({
-            category: "",
-            value: 0,
-            delta: 0,
-            filler: true,
-        }) : [];
-    // TODO: rewrite this filtering nicer, its also done in the return value
-
-    // TODO: Easing function is different on the Fade component, try to use the CSS animation to also use ease-in-out
     return (
-        // <Collapse timeout={500} in={variant === "scroll" ? show : true}>
-        /* <Fade timeout={500} in={variant === "fade" ? show : true}> */
-        // <Box className={(variant === "fade" && show) ? classes.fadeIn : classes.fadeOut}>
         <Box
             id={scrollID}
             className={classes.chartContainer}
@@ -109,42 +98,35 @@ const BarChart = ({
                 alignItems="center"
             >
                 {/* Hide unassigned values from the original array */}
-                {data && [
-                    ...data.sort((a, b) => b.value - a.value),
-                    ...fillerArr
-                ].map((row, i) => (
-                    type === "abs" ? (
-                        <BarChartRowAbs
-                            key={`chart-bar-${i}-${row.value}`}
-                            i={i}
-                            category={row.category}
-                            filler={row.filler}
-                            value={row.value}
-                            delta={row.delta}
-                            max={max}
-                            rankColor={rankColor}
-                            categorySize={categorySize}
-                        />
-                    ) : (
-                            <BarChartRowAbsDelta
+                {data && data.sort((a, b) => b.value - a.value)
+                    .map((row, i) => (
+                        type === "abs" ? (
+                            <BarChartRowAbs
                                 key={`chart-bar-${i}-${row.value}`}
                                 i={i}
                                 category={row.category}
-                                filler={row.filler}
                                 value={row.value}
                                 delta={row.delta}
                                 max={max}
-                                absPosition="behind-bar"
                                 rankColor={rankColor}
                                 categorySize={categorySize}
                             />
-                        )
-                ))}
+                        ) : (
+                                <BarChartRowAbsDelta
+                                    key={`chart-bar-${i}-${row.value}`}
+                                    i={i}
+                                    category={row.category}
+                                    value={row.value}
+                                    delta={row.delta}
+                                    max={max}
+                                    absPosition="behind-bar"
+                                    rankColor={rankColor}
+                                    categorySize={categorySize}
+                                />
+                            )
+                    ))}
             </Grid>
         </Box>
-        // </Box>
-        /* </Fade> */
-        // </Collapse>
     )
 };
 

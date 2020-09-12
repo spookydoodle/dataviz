@@ -21,6 +21,7 @@ interface BarChartDataItem {
     category: string;
     value: number;
     delta?: number;
+    targetValue?: number;
     filler?: boolean;
 }
 

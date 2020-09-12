@@ -12,9 +12,8 @@ import { formatNumber } from '../../../utils/numberFormat';
 interface Props {
     i: number;
     category: string;
-    filler: boolean;
     value: number;
-    delta: number;
+    delta?: number;
     max: number;
     scaling?: 1 | 1000 | 1000000;
     decimals?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
@@ -23,14 +22,13 @@ interface Props {
 }
 
 
-const BarChartRowAbs = ({ 
-    i, 
-    category, 
-    filler, 
-    value, 
-    delta, 
-    max, 
-    scaling = 1, 
+const BarChartRowAbs = ({
+    i,
+    category,
+    value,
+    delta,
+    max,
+    scaling = 1,
     decimals = 0,
     rankColor = "primary",
     categorySize = "md",
@@ -49,7 +47,7 @@ const BarChartRowAbs = ({
             item
             xs={12}
             direction="row"
-            className={`${classes.row} ${filler && classes.hide}`}
+            className={`${classes.row}`}
         >
             <Grid
                 container
@@ -79,8 +77,9 @@ const BarChartRowAbs = ({
                         component="span"
                         noWrap
                         variant="body2"
-                        // className={`${classes.labels} ${delta > 0 ? classes.deltaPos : classes.deltaNeg}`}
-                        className={`${classes.labels} ${classes.delta} ${delta > 0 ? classes.deltaPos : classes.deltaNeg} ${(delta <= -1000 || delta >= 1000) ? classes.deltaMax : ''}`}
+                        className={`${classes.labels} ${classes.delta} 
+                        ${delta && delta > 0 ? classes.deltaPos : classes.deltaNeg} 
+                        ${(delta && (delta <= -1000 || delta >= 1000)) ? classes.deltaMax : ''}`}
                     >
                         {delta ? (
                             `${delta >= 1000 ? ' > +999' : delta <= -999 ? '< -999' : `${delta > 0 ? "+" : ""}${formatNumber(delta, 1, 0)}`}%`
@@ -99,9 +98,9 @@ const BarChartRowAbs = ({
                 justify="flex-start"
                 xs={2}
             >
-                <Typography 
-                    color="primary" 
-                    noWrap 
+                <Typography
+                    color="primary"
+                    noWrap
                     variant="body2"
                     className={`${classes.labels} ${classes.label}`}
                 >

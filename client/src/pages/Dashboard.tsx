@@ -120,7 +120,7 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                 </span>}
                                 color={colPal[0]}
                                 content={<HorizontalBarChartRespWidth
-                                    data={data.filter((row, i) => i < 10).map(row => ({
+                                    data={data.map(row => ({
                                         category: `${row.division.text}`,
                                         value: Number(row.qty.value)
                                     }))}
@@ -146,10 +146,10 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                         variant="scroll"
                                         type="abs"
                                         categorySize="md"
-                                        data={data.filter((row, i) => i < 20).map(row => ({
+                                        data={data.map(row => ({
                                             category: `${row.country.text}`,
                                             value: Number(row.qty.value),
-                                            delta: Math.random() * 100 - Math.random() * 100,
+                                            targetValue: Number(row.qty.value) * Math.random() * 2,
                                         }))}
                                     />}
                             />
@@ -169,10 +169,10 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                         variant="scroll"
                                         type="abs-delta"
                                         categorySize="md"
-                                        data={data.filter((row, i) => i < 20).map(row => ({
+                                        data={data.map(row => ({
                                             category: `${row.division.text}`,
                                             value: Number(row.qty.value),
-                                            delta: Math.random() * 100 - Math.random() * 100,
+                                            targetValue: Number(row.qty.value) * Math.random() * 2,
                                         }))}
                                     />}
                             />

@@ -12,9 +12,8 @@ import { formatNumber } from '../../../utils/numberFormat';
 interface Props {
     i: number;
     category: string;
-    filler: boolean;
     value: number;
-    delta: number;
+    delta?: number;
     max: number;
     scaling?: 1 | 1000 | 1000000;
     decimals?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
@@ -27,7 +26,6 @@ interface Props {
 const BarChartRowAbsDelta = ({
     i,
     category,
-    filler,
     value,
     delta,
     max,
@@ -45,9 +43,8 @@ const BarChartRowAbsDelta = ({
             container
             item
             xs={12}
-            // md={10}
             direction="row"
-            className={`${classes.row} ${filler && classes.hide}`}
+            className={classes.row}
         >
             <Grid
                 container
