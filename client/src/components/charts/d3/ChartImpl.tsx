@@ -6,6 +6,8 @@ import { format } from 'd3-format';
 import { select } from 'd3-selection';
 import { Size, Position } from '../../../logic/datavizTypes';
 
+// This component should receive already aggregated data.
+// Use D3 rollup in the parent component
 interface Props {
    type: "horizontal" | "vertical";
    categories: Array<string>;
@@ -143,7 +145,6 @@ class ChartImpl extends Component<Props, {}> {
          .attr('height', heightRect)
          .attr('width', widthRect)
          .style('fill', barColor)
-         // .exit()
          // Add labels behind horizontal bars
       
       // TODO: Repair - this displays labels for each single stacked bar

@@ -4,12 +4,15 @@ import { scaleLinear, scaleBand } from 'd3-scale';
 import { max } from 'd3-array';
 import ChartImpl from './ChartImpl';
 import { BarChart } from '../../../logic/datavizTypes';
+import { aggregate } from './aggregate';
 
 const HorizontalBarChart = ({ data, size, resize, color }: BarChart) => {
    const theme = useTheme();
-   // TODO: aggregate data or pass callback "if callback -..."
-   const values = data.map(row => row.value)
-   const categories = data.map(row => row.category)
+
+   // Aggregate data
+   const aggrData = aggregate(data);
+   const values = aggrData.map(row => row.value)
+   const categories = aggrData.map(row => row.category)
    const maxValue = max(values)
    // TODO: handle optional props for axis offset from chart borders
    const offset = {

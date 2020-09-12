@@ -1,14 +1,18 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { scaleLinear, scaleBand } from 'd3-scale';
-import { max } from 'd3-array';
+import { max, sum } from 'd3-array';
 import ChartImpl from './ChartImpl';
 import { BarChart } from '../../../logic/datavizTypes';
+import { aggregate } from'./aggregate';
 
 const VerticalBarChart = ({ data, size }: BarChart) => {
-      const theme = useTheme();
-   const values = data.map(row => row.value)
-   const categories = data.map(row => row.category)
+   const theme = useTheme();
+
+   // Aggregate data
+   const aggrData = aggregate(data);
+   const values = aggrData.map(row => row.value)
+   const categories = aggrData.map(row => row.category)
    const maxValue = max(values)
    // TODO: calculate based on longest category text length and font size
    const offset = { 
