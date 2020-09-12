@@ -46,7 +46,7 @@ class App extends Component<{}, State> {
                 The order matters - the most generic paths should
                 be at the very end.
               */}
-              <Route path="/">
+              <Route path={`/`}>
                 <Dashboard
                   user={this.state.user}
                   data={data}

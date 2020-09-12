@@ -54,7 +54,7 @@ const BarChartRowAbs = ({
                 item xs={6}
                 justify="space-between"
             >
-                <Grid item xs={12} lg={8}>
+                <Grid item xs={12} lg={8} container>
                     <Typography
                         component="span"
                         color="primary"

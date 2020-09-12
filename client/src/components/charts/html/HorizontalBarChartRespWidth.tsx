@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Typography, List, ListItem } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { fontSizes } from '../../../styles/themes';
+import { Box, Typography, List, ListItem } from '@material-ui/core';
 import { BarChartData } from '../../../logic/datavizTypes';
 import { aggregate } from '../d3/aggregate';
 
@@ -8,9 +9,10 @@ const useStyles = makeStyles(theme => ({
     barSet: {
         padding: '8px 0',
         width: '100%',
+        maxWidth: "50em",
         fontWeight: 'normal',
         fontStyle: 'normal',
-        fontSize: '10pt',
+        fontSize: fontSizes.tertiary,
         boxSizing: 'border-box',
         display: 'inline-block',
         lineHeight: '10pt',
@@ -22,10 +24,11 @@ const useStyles = makeStyles(theme => ({
         boxSizing: 'border-box',
         display: 'block',
         padding: '3px 0',
-        minHeight: '32px',
+        maxHeight: '.5em',
         clear: 'both',
     },
     barLabel: {
+        fontSize: fontSizes.quaternary,
         boxSizing: 'border-box',
         paddingRight: '15px',
         // marginTop: '3px',
@@ -42,7 +45,6 @@ const useStyles = makeStyles(theme => ({
             width: 'auto',
         },
     },
-
     barLabel2: {
         fontWeight: 'bolder',
         width: '6%',
@@ -72,8 +74,8 @@ const useStyles = makeStyles(theme => ({
     },
     bar: {
         border: '2px solid #000',
-        marginTop: '2px',
-        height: '25px',
+        marginTop: '.25em',
+        height: '1.25em',
         borderRadius: "2px",
         content: '',
         lineHeight: '16px',

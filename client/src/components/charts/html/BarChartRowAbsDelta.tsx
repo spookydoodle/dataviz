@@ -51,7 +51,7 @@ const BarChartRowAbsDelta = ({
                 item xs={5}
                 justify="space-between"
             >
-                <Grid item>
+                <Grid item container>
                     <Typography
                         component="span"
                         color="primary"
@@ -63,6 +63,7 @@ const BarChartRowAbsDelta = ({
                             component="span"
                             color="textSecondary"
                             variant="body2"
+                            noWrap
                             className={`${classes.labels} ${classes.category} ${classes.rank} ${classes.padding}`}
                         >{`#${i + 1} `}</Typography>{category}
                     </Typography>

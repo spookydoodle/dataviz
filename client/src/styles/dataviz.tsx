@@ -7,7 +7,7 @@ import { fontSizes } from './themes';
 
 const rowFontSize = Number(fontSizes.tertiary.replace("vh", ""));
 const rowMargin = .25;
-const rowHeight = 2.75;
+const rowHeight = 3;
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -42,24 +42,49 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingLeft: "1.2em",
         },
         labels: {
-            paddingTop: ".5vh",
+            // paddingTop: ".5vh",
             '&$category': {
                 // textTransform: "uppercase",
+                fontSize: fontSizes.quaternary,
+                [theme.breakpoints.down('sm')]: {
+                    fontSize: fontSizes.quinary,
+                },
+                [theme.breakpoints.only('xs')]: {
+                    fontSize: fontSizes.senary,
+                },
             },
             '&$label': {
                 fontWeight: "bold",
                 textAlign: "center",
                 paddingLeft: ".5em",
-                // fontSize: fontSizes.senary,
+                fontSize: fontSizes.quinary,
+                [theme.breakpoints.down('sm')]: {
+                    fontSize: fontSizes.senary,
+                },
+                [theme.breakpoints.only('xs')]: {
+                    fontSize: fontSizes.septenary,
+                },
             },
             '&$delta': {
                 fontWeight: "bold",
                 // opacity: .6,
-                // fontSize: fontSizes.senary,
+                fontSize: fontSizes.quinary,
+                [theme.breakpoints.down('sm')]: {
+                    fontSize: fontSizes.senary,
+                },
+                [theme.breakpoints.only('xs')]: {
+                    fontSize: fontSizes.septenary,
+                },
             },
             '&$deltaMax': {
                 paddingTop: "1vh",
-                // fontSize: `calc(${fontSizes.senary} - .3vh)`,
+                fontSize: `calc(${fontSizes.quinary} - .3vh)`,
+                [theme.breakpoints.down('sm')]: {
+                    fontSize: fontSizes.senary,
+                },
+                [theme.breakpoints.only('xs')]: {
+                    fontSize: fontSizes.septenary,
+                },
             },
             '&$rank': {
                 paddingRight: ".5em",
@@ -75,6 +100,7 @@ const useStyles = makeStyles((theme: Theme) =>
             display: "flex",
         },
         bar: {
+            height: `${rowHeight}vh`,
             borderRadius: "1px",
             '&$neutral': {
                 marginLeft: ".5em",

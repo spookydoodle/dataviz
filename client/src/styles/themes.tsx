@@ -74,6 +74,8 @@ const fontSizes = {
     quaternary: "2.25vh",
     quinary: "2vh",
     senary: "1.75vh",
+    septenary: "1.5vh",
+    octonary: "1.25vh",
 }
 
 export { createTheme, fontSizes };

@@ -59,8 +59,10 @@ const BarChart = ({
 
     const scrollProps = {
         containerId: scrollID,
-        duration: 1000,
+        duration: 2000,
     };
+
+    const [top, setTop] = useState(true);
     const scrollToBottom = () => {
         animateScroll.scrollToBottom(scrollProps);
     }
@@ -71,12 +73,10 @@ const BarChart = ({
 
     // Automatically scroll the chart to bottom, then top. 
     // Duration determines how long the chart is not moving
-    let [top, setTop] = useState(true);
-
     useEffect(() => {
         if (variant === "scroll") {
             const interval = setInterval(() => {
-                if (play && (maxRows || data.length > 10)) {
+                if (play) {
                     top ? scrollToBottom() : scrollToTop()
                     setTop(prev => !prev)
                 }
@@ -85,7 +85,7 @@ const BarChart = ({
             // Returning a function in useEffect is equivilent of componentWillUnmount in a React Class
             return () => clearTimeout(interval);
         }
-    }, []);
+    }, [data]);
 
     return (
         <Box
