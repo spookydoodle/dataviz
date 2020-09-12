@@ -46,17 +46,7 @@ class App extends Component<{}, State> {
                 The order matters - the most generic paths should
                 be at the very end.
               */}
-              <Route path={home}>
-                <Dashboard
-                  user={this.state.user}
-                  data={data}
-                  mode={this.state.mode}
-                  setMode={this.setMode}
-                // notificationsProps={notificationsProps} 
-                />
-              </Route>
-
-              <Route path={root}>
+              <Route path={process.env.PUBLIC_URL + '/'}>
                 <Dashboard
                   user={this.state.user}
                   data={data}
