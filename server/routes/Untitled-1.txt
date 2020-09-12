@@ -1,0 +1,4 @@
+<Chart scale={} width={}>
+    <StackedBar><Bar/></StackedBar>
+    <tooltip/> <Bar data={data}> </tooltip>
+</Chart>

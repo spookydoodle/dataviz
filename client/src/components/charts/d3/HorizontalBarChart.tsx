@@ -7,6 +7,7 @@ import { BarChart } from '../../../logic/datavizTypes';
 
 const HorizontalBarChart = ({ data, size, resize, color }: BarChart) => {
    const theme = useTheme();
+   // TODO: aggregate data or pass callback "if callback -..."
    const values = data.map(row => row.value)
    const categories = data.map(row => row.category)
    const maxValue = max(values)

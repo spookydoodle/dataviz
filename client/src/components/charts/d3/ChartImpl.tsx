@@ -53,7 +53,8 @@ class ChartImpl extends Component<Props, {}> {
    }
 
    componentDidMount() {
-      this.createBarChart()
+      this.createBarChart();
+      console.log("Rendered, josh is right")
    }
 
 
