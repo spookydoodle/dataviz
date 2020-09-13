@@ -2,8 +2,8 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kxkaro.github.io/dataviz/",
   "proxy": "http://localhost:5000",
+  "homepage": "./",
   "dependencies": {
     "@material-ui/core": "^4.9.14",
     "@material-ui/icons": "^4.5.1",

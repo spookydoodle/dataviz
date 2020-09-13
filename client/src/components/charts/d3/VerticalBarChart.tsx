@@ -40,7 +40,8 @@ const VerticalBarChart = ({ data, size }: BarChart) => {
    const heightRect = (d: number) => chartHeight - yScale(d)
    const widthRect = (d: number) => 0.9 * xScale.bandwidth() 
 
-
+console.log((String(theme.typography.body2.fontSize) || "1rem").replace("rem", ""))
+console.log(theme.typography.fontSize)
    return (
       <ChartImpl
          type="vertical"
@@ -64,8 +65,8 @@ const VerticalBarChart = ({ data, size }: BarChart) => {
          barColor={theme.palette.primary.main}
          xFontColor={theme.palette.text.primary}
          yFontColor={theme.palette.text.primary}
-         xFontSize={theme.typography.fontSize}
-         yFontSize={theme.typography.fontSize - 2}
+         xFontSize={theme.typography.fontSize - 2}
+         yFontSize={theme.typography.fontSize - 4}
       />
    )
 

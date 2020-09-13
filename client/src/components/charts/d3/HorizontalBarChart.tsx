@@ -72,8 +72,8 @@ const HorizontalBarChart = ({ data, size, resize, color }: BarChart) => {
          barColor={theme.palette.primary.main}
          xFontColor={theme.palette.text.primary}
          yFontColor={theme.palette.text.primary}
-         xFontSize={theme.typography.fontSize - 2}
-         yFontSize={theme.typography.fontSize}
+         xFontSize={theme.typography.fontSize - 4}
+         yFontSize={theme.typography.fontSize - 2}
       />
    )
 

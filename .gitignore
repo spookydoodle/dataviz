@@ -8,7 +8,13 @@ yarn-error.log
 
 # Seeds data
 seeds.js
-seeds-data.js
+seeds-data.json
 
-# Source system information
-# sap_constants # normally this would be ignored but this demo app contains dummy data
+# google cloud platform config file
+env_vars.yaml
+
+# Build
+build
+
+# Environment variables
+env_vars.yaml
