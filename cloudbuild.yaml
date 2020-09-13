@@ -5,9 +5,9 @@ steps:
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/dataviz-286409/dataviz']
-  # Deploy container image to Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args: ['run', 'deploy', 'dataviz', '--image', 'gcr.io/dataviz-286409/dataviz', '--region', 'europe-west4', '--platform', 'managed']
+  # # Deploy container image to Cloud Run
+  # - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  #   entrypoint: gcloud
+  #   args: ['run', 'deploy', 'dataviz', '--image', 'gcr.io/dataviz-286409/dataviz', '--region', 'europe-west4', '--platform', 'managed']
   images:
-  - gcr.io/PROJECT_ID/IMAGE
+  - gcr.io/dataviz-286409/dataviz
