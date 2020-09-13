@@ -1,16 +1,14 @@
 steps:
   # running docker-compose
-  - name: 'docker/compose:1.26.2'
-    args: ['up', '-d']
+- name: 'docker/compose:1.26.2'
+  args: ['build']
   # Push the container image to Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/dataviz-286409/dataviz']
-  # Deploy container image to Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args: ['run', 'deploy', 'dataviz', '--image', 'gcr.io/dataviz-286409/dataviz', '--region', 'europe-west4', '--platform', 'managed']
-  images:
-  - gcr.io/dataviz-286409/dataviz
+- name: 'docker/compose:1.26.2'
+  args: ['push']
+  #Deploy container image to Cloud Run
+images:
+  - gcr.io/dataviz-289409/client
+  - gcr.io/dataviz-289409/server
 
 # https://cloud.google.com/cloud-build/docs/deploying-builds/deploy-cloud-run
 #   steps:
