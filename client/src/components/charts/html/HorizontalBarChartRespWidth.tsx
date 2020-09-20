@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
         boxSizing: 'border-box',
         display: 'block',
         padding: '3px 0',
-        maxHeight: '.5em',
         clear: 'both',
     },
     barLabel: {
