@@ -41,8 +41,7 @@ const VerticalBarChart = ({ data, size, labelsPos }: BarChart) => {
    const widthRect = (d: number) => 0.9 * xScale.bandwidth() 
    // const xLabel = (d: number) => 0.9 * xScale.bandwidth() - 100;
 
-console.log((String(theme.typography.body2.fontSize) || "1rem").replace("rem", ""))
-console.log(theme.typography.fontSize)
+   
    return (
       <ChartImpl
          type="vertical"

@@ -54,7 +54,6 @@ const BarChartRowAbsDelta = ({
                 <Grid item container>
                     <Typography
                         component="span"
-                        color="primary"
                         noWrap
                         variant="body2"
                         className={`${classes.labels} ${classes.category} ${classes.padding}`}
@@ -82,7 +81,6 @@ const BarChartRowAbsDelta = ({
                     <Box width={`${value / max * (absPosition === "behind-bar" ? 50 : 100)}%`} className={`${classes.bar} ${classes.neutral}`} />
 
                     {absPosition === "behind-bar" && <Typography
-                        color="primary"
                         component="span"
                         variant="body2"
                         // noWrap
@@ -99,7 +97,6 @@ const BarChartRowAbsDelta = ({
                     xs={1}
                 >
                     <Typography
-                        color="primary"
                         variant="body2"
                         noWrap
                         className={`${classes.labels} ${classes.label}`}

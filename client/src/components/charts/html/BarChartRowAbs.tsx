@@ -57,7 +57,6 @@ const BarChartRowAbs = ({
                 <Grid item xs={8} container>
                     <Typography
                         component="span"
-                        color="primary"
                         variant="body2"
                         noWrap
                         className={`${classes.labels} ${classes.category}`}
@@ -98,7 +97,6 @@ const BarChartRowAbs = ({
                 xs={2}
             >
                 <Typography
-                    color="primary"
                     noWrap
                     variant="body2"
                     className={`${classes.labels} ${classes.label}`}

@@ -12,7 +12,7 @@ const createTheme = (type: Mode) => {
             type: type,
             primary: {
                 light: '#7049c9',
-                main: type === 'dark' ? '#001845' : '#3A0CA3',
+                main: '#3A0CA3',
                 dark: '#1B065E',
                 contrastText: "#FCD5CE",
             },
