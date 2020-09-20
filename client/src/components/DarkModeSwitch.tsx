@@ -8,9 +8,10 @@ interface Props {
     mode: Mode;
     setMode: any;
     style?: object;
+    className?: any;
 }
 
-const DarkModeSwitch = ({ mode, setMode, style }: Props) => {
+const DarkModeSwitch = ({ mode, setMode, style, className }: Props) => {
     const classes = useStyles();
 
     // Toggle mode light/dark
@@ -25,7 +26,7 @@ const DarkModeSwitch = ({ mode, setMode, style }: Props) => {
     };
 
     return (
-        <Typography style={style} variant="subtitle2" noWrap>
+        <Typography style={style} className={className} variant="subtitle2" noWrap>
             Dark Mode
             <Switch
                 checked={state.darkModeChecked}

@@ -117,18 +117,19 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                         <MenuItem value={20}>Outside</MenuItem>
                                     </Select>
                                 </FormControl>]}
-                            ><HorizontalBarChart
-                                        data={data.sort((a, b) =>
-                                            a.country.text < b.country.text ? -1
-                                                : (a.country.text > b.country.text ? 1 : 0))
-                                            .map(row => ({
-                                                category: row.country.text,
-                                                value: Number(row.qty.value)
-                                            }))}
-                                        size={{ width: 400, height: 600 }}
-                                        resize="responsive"
-                                        labelsPos={Number(labelsPos) === 20 ? "outside" : "inside"}
-                                    />
+                            >
+                                <HorizontalBarChart
+                                    data={data.sort((a, b) =>
+                                        a.country.text < b.country.text ? -1
+                                            : (a.country.text > b.country.text ? 1 : 0))
+                                        .map(row => ({
+                                            category: row.country.text,
+                                            value: Number(row.qty.value)
+                                        }))}
+                                    size={{ width: 400, height: 600 }}
+                                    resize="responsive"
+                                    labelsPos={Number(labelsPos) === 20 ? "outside" : "inside"}
+                                />
                             </ChartCard>
                         </Grid>
 

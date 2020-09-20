@@ -1,14 +1,17 @@
 import React from 'react';
 import clsx from 'clsx';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Link } from '../../utils/Link';
-import { Drawer, List, ListItem, ListItemText, ListItemIcon, Divider, IconButton, Hidden } from '@material-ui/core';
+// import { Link } from '../../utils/Link';
+import Fade from '@material-ui/core/Fade';
+import { Drawer, List, ListItem, ListItemText, ListItemIcon, Divider, IconButton, } from '@material-ui/core';
+import PieChartIcon from '@material-ui/icons/PieChart';
+import BubbleChartIcon from '@material-ui/icons/BubbleChart';
+import TimelineIcon from '@material-ui/icons/Timeline';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import DarkModeSwitch from '../DarkModeSwitch';
-import { AuthButtonsVertical } from './AuthButtons';
+// import { AuthButtonsVertical } from './AuthButtons';
 import { PATHS } from '../../constants/data';
 import { DrawerVariant, Mode, User } from '../../logic/types';
 
@@ -59,6 +62,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     colorTextPrimary: {
         color: theme.palette.text.primary,
+    },
+    rotate: {
+        transform: "rotate(90deg)"
+    },
+    hide: {
+        display: "none",
+    },
+    toRight: {
+        marginLeft: "auto",
     }
   }),
 );
@@ -70,12 +82,38 @@ const MenuDrawer = ({ user, variant = 'temporary', mode, setMode, open, handleDr
 
     const items = [
         {
-            name: 'Home',
+            name: 'Vertical bar',
+            icon: <BarChartIcon />,
+            path: home,
+        },
+        {
+            name: 'Horizontal bar',
+            icon: <BarChartIcon className={classes.rotate} />,
+            path: home,
+        },
+        {
+            name: 'Pie',
+            icon: <PieChartIcon />,
+            path: home,
+        },
+        {
+            name: 'Doughnut',
+            icon: <DonutLargeIcon />,
+            path: home,
+        },
+        {
+            name: 'Bubble',
+            icon: <BubbleChartIcon />,
+            path: home,
+        },
+        {
+            name: 'Timeline',
+            icon: <TimelineIcon />,
             path: home,
         },
     ];
 
-
+const style = { marginLeft: "auto" }
     return (
         // <Drawer
         //     className={classes.drawer}
@@ -132,22 +170,17 @@ const MenuDrawer = ({ user, variant = 'temporary', mode, setMode, open, handleDr
             </div>
             <Divider />
             <List >
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon className={classes.colorTextPrimary}>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
+                {items.map((item, i) => (
+                    <ListItem button key={`${item.name}-${i}`}>
+                        <ListItemIcon className={classes.colorTextPrimary}>{item.icon}</ListItemIcon>
+                        <ListItemText primary={item.name} />
                     </ListItem>
                 ))}
             </List>
             <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon className={classes.colorTextPrimary}>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
+            <Fade in={open}>
+                <DarkModeSwitch className={classes.toRight} mode={mode} setMode={setMode} />
+            </Fade>
         </Drawer>
     );
 };
