@@ -217,6 +217,15 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: '10em',
             color: theme.palette.primary.main,
         },
+        rowContainer: {
+            width: "100%",
+        },
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: "150px",
+            width: "150px",
+            marginLeft: "auto !important",
+        },
     })
 );
 

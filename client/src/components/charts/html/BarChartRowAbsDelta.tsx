@@ -88,7 +88,7 @@ const BarChartRowAbsDelta = ({
                         // noWrap
                         className={`${classes.labels} ${classes.label}`}
                     >
-                        {value ? `${formatNumber(value, 1000, 1)}` : "0.0"}
+                        {value ? `${formatNumber(value, scaling, decimals)}` : "0.0"}
                     </Typography>}
                 </Grid>
 
@@ -111,7 +111,7 @@ const BarChartRowAbsDelta = ({
                 <Grid
                     container
                     item
-                    xs={12} lg={7}
+                    xs={7}
                     className={classes.barContainer}
                 >
                     {/* TODO: Add check for abs(delta) > 100 and add gradient css  */}

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStyles } from '../styles/main';
 import { LinearBuffer } from '../components/Loading';
-import { Grid, } from '@material-ui/core';
+import { Box, Grid, InputLabel, FormControl, MenuItem, FormHelperText, Select } from '@material-ui/core';
 import AppLayout from '../layouts/AppLayout';
 import HorizontalBarChart from '../components/charts/d3/HorizontalBarChart';
 import VerticalBarChart from '../components/charts/d3/VerticalBarChart';
@@ -26,6 +26,12 @@ interface Props {
 const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => {
     const classes = useStyles();
     const colPal = Object.values(PALETTES.GREEN_ORANGE);
+    const [labelsPos, setLabelsPos] = React.useState('10');
+
+    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setLabelsPos(event.target.value as string);
+    };
+
     return (
         <AppLayout
             user={user}
@@ -60,7 +66,8 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                     title="Racing divisions"
                                     subtitle="Values are in EUR"
                                     color={colPal[0]}
-                                    content={<BarChartRace
+                                >
+                                    <BarChartRace
                                         data={data.map(row => ({
                                             date: new Date(`${row.year.key}-${row.month.key}-01`),
                                             name: row.division.text,
@@ -68,15 +75,16 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                             value: Number(row?.sales?.value) / 1000,
                                         }))}
                                         size={{ width: 500, height: 250 }}
-                                    />}
-                                />
+                                    />
+                                </ChartCard>
                             </Grid>
                             <Grid item xs={12} className={classes.spacingTop}>
                                 <ChartCard
                                     title="Sales by calendar month"
                                     subtitle="Values are in EUR"
                                     color={colPal[0]}
-                                    content={<VerticalBarChart
+                                >
+                                    <VerticalBarChart
                                         data={data.sort((a, b) => a.month.key < b.month.key ? -1 : (
                                             a.month.key > b.month.key ? 1 : 0
                                         ))
@@ -86,8 +94,8 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                             }))}
                                         size={{ width: 500, height: 250 }}
                                         resize="responsive"
-                                    />}
-                                />
+                                    />
+                                </ChartCard>
                             </Grid>
                         </Grid>
 
@@ -96,18 +104,32 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                 title="Ordered quantity by country"
                                 subtitle="Values are in pieces"
                                 color={colPal[0]}
-                                content={<HorizontalBarChart
-                                    data={data.sort((a, b) =>
-                                        a.country.text < b.country.text ? -1
-                                            : (a.country.text > b.country.text ? 1 : 0))
-                                        .map(row => ({
-                                            category: row.country.text,
-                                            value: Number(row.qty.value)
-                                        }))}
-                                    size={{ width: 400, height: 600 }}
-                                    resize="responsive"
-                                />}
-                            />
+                                actionItems={[<FormControl className={classes.formControl}>
+                                    <InputLabel id="labels-position">Labels position</InputLabel>
+                                    <Select
+                                        labelId="select-labels-position"
+                                        id="select-labels-position"
+                                        value={labelsPos}
+                                        onChange={handleChange}
+                                        label="Labels position"
+                                    >
+                                        <MenuItem value={10}>Inside</MenuItem>
+                                        <MenuItem value={20}>Outside</MenuItem>
+                                    </Select>
+                                </FormControl>]}
+                            ><HorizontalBarChart
+                                        data={data.sort((a, b) =>
+                                            a.country.text < b.country.text ? -1
+                                                : (a.country.text > b.country.text ? 1 : 0))
+                                            .map(row => ({
+                                                category: row.country.text,
+                                                value: Number(row.qty.value)
+                                            }))}
+                                        size={{ width: 400, height: 600 }}
+                                        resize="responsive"
+                                        labelsPos={Number(labelsPos) === 20 ? "outside" : "inside"}
+                                    />
+                            </ChartCard>
                         </Grid>
 
                         <Grid item xs={12}>
@@ -119,16 +141,17 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                         <i className="user secret icon" />
                                 </span>}
                                 color={colPal[0]}
-                                content={<HorizontalBarChartRespWidth
+                            >
+                                <HorizontalBarChartRespWidth
                                     data={data.map(row => ({
                                         category: `${row.division.text}`,
                                         value: Number(row.qty.value)
                                     }))}
                                     color={colPal[0]}
-                                />}
-                            />
+                                />
+                            </ChartCard>
                         </Grid>
-                        
+
                         {/* TODO: Add counter to when the scroll happens */}
                         {/* TODO: Repair responsiveness */}
                         {/* TODO: Add a selector fo changing - constant slow scrolling or fast and stay */}
@@ -140,19 +163,20 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                     This one scrolls up and down and up and down and up and down.
                                 </span>}
                                 color={colPal[0]}
-                                content={<BarChart
-                                        id="abs"
-                                        play={true}
-                                        variant="scroll"
-                                        type="abs"
-                                        categorySize="md"
-                                        data={data.map(row => ({
-                                            category: `${row.country.text}`,
-                                            value: Number(row.qty.value),
-                                            targetValue: Number(row.qty.value) * Math.random() * 2,
-                                        }))}
-                                    />}
-                            />
+                            >
+                                <BarChart
+                                    id="abs"
+                                    play={true}
+                                    variant="scroll"
+                                    type="abs"
+                                    categorySize="md"
+                                    data={data.map(row => ({
+                                        category: `${row.country.text}`,
+                                        value: Number(row.qty.value),
+                                        targetValue: Number(row.qty.value) * Math.random() * 2,
+                                    }))}
+                                />
+                            </ChartCard>
                         </Grid>
 
                         <Grid item xs={12} lg={6}>
@@ -163,19 +187,20 @@ const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => 
                                     Compare numbers with their targets and judge if the progress is as it was supposed to be.
                                 </span>}
                                 color={colPal[0]}
-                                content={<BarChart
-                                        id="absDelta"
-                                        play={true}
-                                        variant="scroll"
-                                        type="abs-delta"
-                                        categorySize="md"
-                                        data={data.map(row => ({
-                                            category: `${row.division.text}`,
-                                            value: Number(row.qty.value),
-                                            targetValue: Number(row.qty.value) * Math.random() * 2,
-                                        }))}
-                                    />}
-                            />
+                            >
+                                <BarChart
+                                    id="absDelta"
+                                    play={true}
+                                    variant="scroll"
+                                    type="abs-delta"
+                                    categorySize="md"
+                                    data={data.map(row => ({
+                                        category: `${row.division.text}`,
+                                        value: Number(row.qty.value),
+                                        targetValue: Number(row.qty.value) * Math.random() * 2,
+                                    }))}
+                                />
+                            </ChartCard>
                         </Grid>
                     </Grid>
                 )}

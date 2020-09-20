@@ -1,13 +1,15 @@
 import React from 'react';
 import { useStyles } from '../styles/main';
-import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
+import { Card, CardHeader, CardActions, CardContent, Typography } from '@material-ui/core';
+import { Children } from '../logic/types';
 
 interface Props {
     title: string;
     subtitle: string;
     description?: any;
     color: string;
-    content: any;
+    actionItems?: Array<any>
+    children: Children;
 }
 
 const Dashboard = ({
@@ -15,7 +17,8 @@ const Dashboard = ({
     subtitle,
     description = undefined,
     color,
-    content 
+    actionItems,
+    children 
 }: Props) => {
     const classes = useStyles();
     return (
@@ -32,8 +35,12 @@ const Dashboard = ({
             </CardContent> : null}
 
             <CardContent className={classes.flexCenter}>
-                {content}
+                {children}
             </CardContent>
+
+            <CardActions disableSpacing>
+                {actionItems}
+            </CardActions>
         </Card>
     )
 };

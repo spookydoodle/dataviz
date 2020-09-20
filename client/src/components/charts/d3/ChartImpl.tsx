@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { useTheme } from '@material-ui/core/styles';
+// import { useTheme } from '@material-ui/core/styles';
 import { axisLeft, axisBottom } from 'd3-axis';
 import { format } from 'd3-format';
 import { select } from 'd3-selection';
@@ -25,6 +25,9 @@ interface Props {
    yRect: (d: number, i: number) => number;
    widthRect: (d: number) => number;
    heightRect: (d: number) => number;
+   labelsPos?: "inside" | "outside";
+   xLabel?: (d: number) => number;
+   yLabel?: (d: number) => number;
    widthRectLabel?: (d: number) => number;
    heightRectLabel?: (d: number) => number;
    yRectLabel?: (d: number, i: number) => number;
@@ -57,7 +60,16 @@ class ChartImpl extends Component<Props, {}> {
    componentDidMount() {
       this.createBarChart();
    }
+   componentDidUpdate() {
+      this.clearBarChart();
+      this.createBarChart();
+   }
 
+   clearBarChart() {
+      const node = this.node;
+      const chart = select(node);
+      chart.selectAll("*").remove()
+   }
 
    createBarChart() {
       const node = this.node;
@@ -74,6 +86,9 @@ class ChartImpl extends Component<Props, {}> {
          yRect,
          widthRect,
          heightRect,
+         labelsPos = "inside",
+         xLabel,
+         yLabel,
          widthRectLabel,
          heightRectLabel,
          yRectLabel,
@@ -94,13 +109,11 @@ class ChartImpl extends Component<Props, {}> {
 
       const a = size;
       const chart = select(node);
-
       // // Add responsiveness to the chart based on the 'resize' parameter, by default fixed size
       // if (resize === "responsive") {
       //    chart.attr("viewBox", [0, 0, size.width, size.height])
       //       .attr("preserveAspectRatio", "xMidYMid meet");
       // }
-
 
 
       // Add margin to the whole chart
@@ -146,8 +159,8 @@ class ChartImpl extends Component<Props, {}> {
          .style('fill', barColor)
          // Add labels behind horizontal bars
       
-      // TODO: Repair - this displays labels for each single stacked bar
-      if (type === "horizontal" && yRectLabel) chart.append("g")
+      // Add labels behind the bars
+      if (type === "horizontal" && yRectLabel && xLabel) chart.append("g")
       .attr('transform', `translate(${offset.left}, 0)`)
          .attr("fill", "white")
          .attr("text-anchor", "end")
@@ -155,14 +168,14 @@ class ChartImpl extends Component<Props, {}> {
          .selectAll("text")
          .data(values)
          .join("text")
-         .attr("x", widthRect)
+         .attr("x", labelsPos === "outside" ? widthRect : xLabel)
          .attr("y", yRectLabel)
          .attr("dy", "0.35em")
-         .attr("dx", -4)
-         .text((d: number) => d)
+         .attr("dx", 0)
+         .text((d: number) => format(",")(d))
          .call((text: { filter: any }) => text.filter(widthRectLabel ? widthRectLabel : 1 < 20)) // short bars
             .attr("dx", +4)
-            .attr("fill", barColor)
+            .attr("fill", labelsPos === "outside" ? barColor : "rgba(255, 255, 255, .87)")
             .attr("text-anchor", "start")
 
    }

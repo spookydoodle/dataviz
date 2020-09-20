@@ -6,7 +6,7 @@ import ChartImpl from './ChartImpl';
 import { BarChart } from '../../../logic/datavizTypes';
 import { aggregate } from './aggregate';
 
-const HorizontalBarChart = ({ data, size, resize, color }: BarChart) => {
+const HorizontalBarChart = ({ data, size, resize, color, labelsPos }: BarChart) => {
    const theme = useTheme();
 
    // Aggregate data
@@ -44,6 +44,7 @@ const HorizontalBarChart = ({ data, size, resize, color }: BarChart) => {
    const yRectLabel = (d: number, i: number) => (yScale(categories[i]) || 0) + yScale.bandwidth() / 2
    const widthRect = (d: number) => xScale(d)
    const widthRectLabel = (d: number) => xScale(d) - xScale(0)
+   const xLabel = (d: number) => xScale(d) - 40;
 
 
    return (
@@ -59,6 +60,8 @@ const HorizontalBarChart = ({ data, size, resize, color }: BarChart) => {
          showYScale={true}
          xRect={xRect}
          yRect={yRect}
+         xLabel={xLabel}
+         labelsPos={labelsPos}
          widthRect={widthRect}
          widthRectLabel={widthRectLabel}
          yRectLabel={yRectLabel}

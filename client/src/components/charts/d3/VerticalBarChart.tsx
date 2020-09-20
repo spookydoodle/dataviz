@@ -6,7 +6,7 @@ import ChartImpl from './ChartImpl';
 import { BarChart } from '../../../logic/datavizTypes';
 import { aggregate } from'./aggregate';
 
-const VerticalBarChart = ({ data, size }: BarChart) => {
+const VerticalBarChart = ({ data, size, labelsPos }: BarChart) => {
    const theme = useTheme();
 
    // Aggregate data
@@ -39,6 +39,7 @@ const VerticalBarChart = ({ data, size }: BarChart) => {
    const yRect = (d: number, i: number) => yScale(d)
    const heightRect = (d: number) => chartHeight - yScale(d)
    const widthRect = (d: number) => 0.9 * xScale.bandwidth() 
+   // const xLabel = (d: number) => 0.9 * xScale.bandwidth() - 100;
 
 console.log((String(theme.typography.body2.fontSize) || "1rem").replace("rem", ""))
 console.log(theme.typography.fontSize)
@@ -55,6 +56,7 @@ console.log(theme.typography.fontSize)
          showYScale={true}
          xRect={xRect}
          yRect={yRect}
+         labelsPos={labelsPos}
          widthRect={widthRect}
          heightRect={heightRect}
          xCatAngle={-45}

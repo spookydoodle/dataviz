@@ -15,6 +15,7 @@ interface BarChart {
     size: Size;
     resize?: "fixed" | "responsive";
     color?: string;
+    labelsPos?: "outside" | "inside";
 }
 
 interface BarChartDataItem {
