@@ -36,8 +36,8 @@ const VerticalBarChart = ({ data, size, labelsPos }: BarChart) => {
       .domain([maxValue ? maxValue : 100, 0]) // TODO: solve this i na better way
 
    const xRect = (d: number, i: number) => offset.left + 0.05 * xScale.bandwidth() + (xScale(categories[i]) || 0)
-   const yRect = (d: number, i: number) => yScale(d)
-   const heightRect = (d: number) => chartHeight - yScale(d)
+   const yRect = (d: number, i: number) => (yScale(d) || 0)
+   const heightRect = (d: number) => chartHeight - (yScale(d) || 0)
    const widthRect = (d: number) => 0.9 * xScale.bandwidth() 
    // const xLabel = (d: number) => 0.9 * xScale.bandwidth() - 100;
 

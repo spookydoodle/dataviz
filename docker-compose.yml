@@ -1,15 +1,17 @@
 version: '3'
 services:
-  web:
-    image: gcr.io/dataviz-289409/client
+  dataviz-web:
+    image: kxkaro/dataviz-client
     build: ./client
+    restart: always
     ports: 
-      - "3000:80"
+      - "80:80"
     depends_on: 
-      - "api"
+      - "dataviz-api"
     stdin_open: true
-  api:
-    image: gcr.io/dataviz-289409/server
+  dataviz-api:
+    image: kxkaro/dataviz-server
     build: ./server
+    restart: always
     expose:
       - "5000"

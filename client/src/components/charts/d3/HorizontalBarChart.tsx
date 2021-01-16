@@ -36,15 +36,15 @@ const HorizontalBarChart = ({ data, size, resize, color, labelsPos }: BarChart) 
       .range([0, chartHeight])
       .domain(categories)
 
-   const xRect = (d: number, i: number) => offset.left + xScale(0)
+   const xRect = (d: number, i: number) => offset.left + (xScale(0) || 0);
    const yRect = (d: number, i: number) => 0.05 * yScale.bandwidth() + (yScale(categories[i]) || 0);
-   const heightRect = (d: number) => 0.9 * yScale.bandwidth()
+   const heightRect = (d: number) => 0.9 * yScale.bandwidth();
    
    // For Labels by bars
    const yRectLabel = (d: number, i: number) => (yScale(categories[i]) || 0) + yScale.bandwidth() / 2
-   const widthRect = (d: number) => xScale(d)
-   const widthRectLabel = (d: number) => xScale(d) - xScale(0)
-   const xLabel = (d: number) => xScale(d) - 40;
+   const widthRect = (d: number) => xScale(d) || 0;
+   const widthRectLabel = (d: number) => (xScale(d) || 0) - (xScale(0) || 0);
+   const xLabel = (d: number) => (xScale(d) || 0) - 40;
 
 
    return (

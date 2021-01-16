@@ -18,3 +18,4 @@ build
 
 # Environment variables
 env_vars.yaml
+secret.yaml

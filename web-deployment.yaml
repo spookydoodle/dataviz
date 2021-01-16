@@ -2,31 +2,31 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert
+    kompose.cmd: C:\kompose\kompose.exe convert
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
-    io.kompose.service: web
-  name: web
+    io.kompose.service: dataviz-web
+  name: dataviz-web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: web
+      io.kompose.service: dataviz-web
   strategy: {}
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert
+        kompose.cmd: C:\kompose\kompose.exe convert
         kompose.version: 1.21.0 (992df58d8)
       creationTimestamp: null
       labels:
-        io.kompose.service: web
+        io.kompose.service: dataviz-web
     spec:
       containers:
-      - image: gcr.io/dataviz-289409/client
+      - image: kxkaro/dataviz-client
         imagePullPolicy: ""
-        name: web
+        name: dataviz-web
         ports:
         - containerPort: 80
         resources: {}
