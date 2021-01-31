@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useStyles } from '../styles/main';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Typography, Switch } from '@material-ui/core';
 import { Mode } from '../logic/types';
 
@@ -10,6 +10,15 @@ interface Props {
     style?: object;
     className?: any;
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    flexCenter: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+  })
+);
 
 const DarkModeSwitch = ({ mode, setMode, style, className }: Props) => {
     const classes = useStyles();

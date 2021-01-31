@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStyles } from '../../styles/main';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Link } from '../../utils/Link';
 import { Box, Button, List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import { User } from '../../logic/types';
@@ -18,6 +18,16 @@ interface Props {
     user: User | null | undefined;
     style?: object;
 }
+
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    flexCenter: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+  })
+);
 
 const style = { margin: '0 15px' };
 

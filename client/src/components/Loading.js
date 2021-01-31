@@ -1,6 +1,15 @@
 import React from 'react';
-import { useStyles } from '../styles/main';
-import { Container, Typography, LinearProgress, CircularProgress } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { Typography, LinearProgress, CircularProgress } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    flexCenter: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+  })
+);
 
 export const Loading = () => {
     const classes = useStyles();

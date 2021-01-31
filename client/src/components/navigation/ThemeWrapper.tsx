@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStyles } from '../../styles/main';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { createTheme } from '../../styles/themes';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,15 @@ interface Props {
     mode: Mode;
     children: any;
 }
+
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+        display: 'flex',
+    },
+  })
+);
 
 const ThemeWrapper = ({ mode, children }: Props) => {
     const classes = useStyles();

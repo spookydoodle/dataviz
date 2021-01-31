@@ -1,11 +1,41 @@
 import React from 'react';
-import { useStyles } from '../../styles/main';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { Link } from '../../utils/Link';
-import { Box, Grid, Button, Typography, Hidden, Grow } from '@material-ui/core';
+import { Grid, Button, Typography, Hidden, Grow } from '@material-ui/core';
 import { Jumbotron as JumbotronProps } from '../../logic/types';
 //import * as jumbotronLight from '../../img/landing/JumbotronLight.png';
 import { PATHS } from '../../constants/data';
 const { main } = PATHS;
+
+const drawerWidth = 300;
+const toolbarHeight = 50;
+const jumbotronHeight = "100vh";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    jumbotron: {
+        minHeight: jumbotronHeight,
+    },
+    jumbotronContent: {
+        marginTop: `${toolbarHeight}px`,
+        position: 'absolute',
+        color: '#fff',
+        height: `calc(${jumbotronHeight} - ${toolbarHeight}px)`,
+    },
+    jumbotronImg: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: jumbotronHeight,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        zIndex: -1,
+        backgroundColor: '#000', // backgroundImage imported as a component in Layout.tsx
+        boxShadow: '0px 2px 4px -1px rgba(0,0, 0.2)',
+    },
+  })
+);
 
 const Jumbotron = ({ img = '', title = 'Hello', subtitle = 'Welcome', actions = [], onClick }: JumbotronProps) => {
     const classes = useStyles();

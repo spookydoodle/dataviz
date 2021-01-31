@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import ThemeWrapper from '../components/navigation/ThemeWrapper';
 import Jumbotron from '../components/navigation/Jumbotron';
@@ -35,8 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'flex-end',
       padding: theme.spacing(0, 1),
+      minHeight: "64px",
       // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
+    //   ...theme.mixins.toolbar,
     },
     content: {
       flexGrow: 1,

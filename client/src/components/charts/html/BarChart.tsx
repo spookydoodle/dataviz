@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { animateScroll } from "react-scroll";
-import { useStyles } from '../../../styles/dataviz';
 import {
     Box,
     Grid,
@@ -24,6 +24,20 @@ interface Props {
     categorySize?: "sm" | "md";
 }
 
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    chartContainer: {
+        width: "100%",
+        // maxHeight: `${(rowFontSize + 2 * rowMargin) * 10}vh`,
+        maxHeight: `19.5em`,
+        // maxHeight: `36vh`,
+        overflow: "hidden",
+        paddingLeft: "1em",
+        paddingRight: "1em",
+    },
+  })
+);
 
 const BarChart = ({
     id,

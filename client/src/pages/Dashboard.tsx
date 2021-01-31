@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useStyles } from '../styles/main';
+import React from 'react';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+// import { useStyles } from '../styles/main';
 import { LinearBuffer } from '../components/Loading';
-import { Box, Grid, InputLabel, FormControl, MenuItem, FormHelperText, Select } from '@material-ui/core';
+import { Grid, InputLabel, FormControl, MenuItem, Select } from '@material-ui/core';
 import AppLayout from '../layouts/AppLayout';
 import HorizontalBarChart from '../components/charts/d3/HorizontalBarChart';
 import VerticalBarChart from '../components/charts/d3/VerticalBarChart';
@@ -22,6 +23,23 @@ interface Props {
     notificationsProps?: NotificationProps;
     showError?: any;
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    spacingTop: {
+        paddingTop: theme.spacing(1),
+    },
+    spacingBottom: {
+        paddingBottom: theme.spacing(1),
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: "150px",
+        width: "150px",
+        marginLeft: "auto !important",
+    },
+  })
+);
 
 const Dashboard = ({ user, data, mode, setMode, notificationsProps }: Props) => {
     const classes = useStyles();

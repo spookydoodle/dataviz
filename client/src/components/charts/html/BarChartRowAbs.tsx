@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStyles } from '../../../styles/dataviz';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {
     Box,
     Grid,
@@ -8,6 +8,8 @@ import {
     // Fade 
 } from '@material-ui/core';
 import { formatNumber } from '../../../utils/numberFormat';
+import { fontSizes } from '../../../styles/themes';
+
 
 interface Props {
     i: number;
@@ -21,6 +23,118 @@ interface Props {
     categorySize?: "sm" | "md";
 }
 
+const rowFontSize = Number(fontSizes.tertiary.replace("vh", ""));
+const rowMargin = .25;
+const rowHeight = 3;
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    row: {
+        marginTop: `${rowMargin}vh`,
+        marginBottom: `${rowMargin}vh`,
+        height: `${rowHeight}vh`,
+    },
+    
+    barContainer: {
+        display: "flex",
+    },
+    bar: {
+        height: `${rowHeight}vh`,
+        borderRadius: "1px",
+        '&$neutral': {
+            marginLeft: ".5em",
+            marginRight: ".5em",
+            backgroundColor: theme.palette.primary.main,
+        },
+        '&$pos': {
+            marginRight: ".5em",
+            backgroundColor: theme.palette.success.main,
+        },
+        '&$neg': {
+            marginLeft: ".5em",
+            backgroundColor: theme.palette.error.main,
+        },
+        '&$posExceed': {
+            marginRight: ".5em",
+            background: `linear-gradient(90deg, ${theme.palette.success.main} 80%, rgba(0,0,0,0) 100%)`,
+        },
+        '&$negExceed': {
+            marginLeft: ".5em",
+            background: `linear-gradient(90deg, rgba(0,0,0,0) 0%, ${theme.palette.error.main} 20%);`,
+        },
+    },
+    pos: {},
+    neg: {},
+    posExceed: {},
+    negExceed: {},
+    neutral: {},
+    labels: {
+        // paddingTop: ".5vh",
+        '&$category': {
+            // textTransform: "uppercase",
+            fontSize: fontSizes.quaternary,
+            [theme.breakpoints.down('sm')]: {
+                fontSize: fontSizes.quinary,
+            },
+            [theme.breakpoints.only('xs')]: {
+                fontSize: fontSizes.senary,
+            },
+        },
+        '&$label': {
+            fontWeight: "bold",
+            textAlign: "center",
+            paddingLeft: ".5em",
+            fontSize: fontSizes.quinary,
+            [theme.breakpoints.down('sm')]: {
+                fontSize: fontSizes.senary,
+            },
+            [theme.breakpoints.only('xs')]: {
+                fontSize: fontSizes.septenary,
+            },
+        },
+        '&$delta': {
+            fontWeight: "bold",
+            // opacity: .6,
+            fontSize: fontSizes.quinary,
+            [theme.breakpoints.down('sm')]: {
+                fontSize: fontSizes.senary,
+            },
+            [theme.breakpoints.only('xs')]: {
+                fontSize: fontSizes.septenary,
+            },
+        },
+        '&$deltaMax': {
+            paddingTop: "1vh",
+            fontSize: `calc(${fontSizes.quinary} - .3vh)`,
+            [theme.breakpoints.down('sm')]: {
+                fontSize: fontSizes.senary,
+            },
+            [theme.breakpoints.only('xs')]: {
+                fontSize: fontSizes.septenary,
+            },
+        },
+        '&$rank': {
+            paddingRight: ".5em",
+            fontWeight: "bold",
+        },
+    },
+    category: {},
+    label: {},
+    delta: {},
+    deltaMax: {},
+    rank: {},
+    deltaPos: {
+        fontWeight: "bold",
+        color: theme.palette.success.main,
+        textAlign: "right",
+    },
+    deltaNeg: {
+        fontWeight: "bold",
+        color: theme.palette.error.main,
+        textAlign: "right",
+    },
+  })
+);
 
 const BarChartRowAbs = ({
     i,

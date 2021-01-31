@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - image: kxkaro/dataviz-client
-        imagePullPolicy: ""
+        imagePullPolicy: "Always"
         name: dataviz-web
         ports:
         - containerPort: 80

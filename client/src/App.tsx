@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Dashboard from './pages/Dashboard';
 import ScrollToTop from './utils/ScrollToTop';
-import salesService from './services/salesService';
+// import salesService from './services/salesService';
 import dummyData from './constants/dummyData';
 import { State, Mode } from './logic/types';
 import { PATHS } from './constants/data';
@@ -24,21 +24,20 @@ class App extends Component<{}, State> {
   setMode = (mode: Mode) => {
     this.setState({ mode: mode });
   };
+
   componentDidMount() {
-    salesService.get()
-      .then(data => this.setState({ data: data }))
-      .catch(err => this.setState({ data: dummyData }));
+    this.setState({ data: dummyData })
+    // salesService.get()
+    //   .then(data => this.setState({ data: data }))
+    //   .catch(err => this.setState({ data: dummyData }));
   }
-
-
 
   render() {
     const { whoamiRequestDone, user, notifications, data } = this.state;
 
     return (
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router hashType="slash">
         <ScrollToTop>
-          <div className="App">
             <Switch>
               {/*
                 A Switch will iterate through all routes and return
@@ -46,7 +45,8 @@ class App extends Component<{}, State> {
                 The order matters - the most generic paths should
                 be at the very end.
               */}
-              <Route path="/">
+              
+              <Route path="/dashboard">
                 <Dashboard
                   user={this.state.user}
                   data={data}
@@ -55,8 +55,11 @@ class App extends Component<{}, State> {
                 // notificationsProps={notificationsProps} 
                 />
               </Route>
+              
+              <Route path="/">
+                <Redirect to="/dashboard" />
+              </Route>
             </Switch>
-          </div>
         </ScrollToTop>
       </Router>
     )
