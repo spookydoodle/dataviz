@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Dashboard from './pages/Dashboard';
 import ScrollToTop from './utils/ScrollToTop';
@@ -36,7 +36,7 @@ class App extends Component<{}, State> {
     const { whoamiRequestDone, user, notifications, data } = this.state;
 
     return (
-      <Router hashType="slash">
+      <Router>
         <ScrollToTop>
             <Switch>
               {/*

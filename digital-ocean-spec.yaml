@@ -1,0 +1,15 @@
+name: dataviz
+region: ams
+static_sites:
+- build_command: yarn build
+  catchall_document: index.html
+  # error_document: 404.html
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: spookydoodle/dataviz
+  name: client
+  output_dir: /build
+  routes:
+  - path: /
+  source_dir: client
